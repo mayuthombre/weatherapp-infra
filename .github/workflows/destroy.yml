@@ -30,6 +30,9 @@ jobs:
       run: make run_destroy_plan       
 
   terraform_destroy_apply:
+    defaults:
+      run:
+        working-directory: infrastructure
     environment:
       name: approval
     needs: terraform_destroy_plan
