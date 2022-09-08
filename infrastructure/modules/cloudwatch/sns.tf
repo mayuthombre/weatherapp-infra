@@ -14,7 +14,7 @@ resource "aws_sns_topic" "weatherapp-sns" {
 # Create a SNS topic subscription
 resource "aws_sns_topic_subscription" "weather-snssub" {
   protocol  = "email"                          # define protocol to use
-  endpoint  = "mayu.thombre@contino.io"        # endpoint to send data to 
+  endpoint  = var.email        # endpoint to send data to 
   topic_arn = aws_sns_topic.weatherapp-sns.arn # ARN of the SNS topic created above
 
   depends_on = [

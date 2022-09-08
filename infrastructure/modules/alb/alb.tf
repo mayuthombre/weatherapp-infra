@@ -2,28 +2,6 @@ module "locals" {
   source = "../locals"
 }
 
-# data "aws_ssm_parameter" "vpc_id" {
-#   name  = "/${module.locals.name}/vpc-id"
-# }
-
-
-
-# # Pull data on the Main Infra public subnets.
-# data "aws_subnets" "public" {
-#   filter {
-#     name   = "vpc-id"
-#     values = [data.aws_ssm_parameter.vpc_id.value]
-#   }
-#   filter {
-#     name = "availability-zone"
-#     values = var.availability_zones
-#   }
-#   tags = {
-#     tier = "public"
-#   }
-# }
-
-
 # create an application load balancer
 resource "aws_alb" "weatherapp_load_balancer" {
   name = "${module.locals.name}-alb"
@@ -65,7 +43,7 @@ resource "aws_lb_target_group" "weatherapp_target_group" {
   )
 }
 
-# Create listener for port 443
+# Create listener for port 80
 resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_alb.weatherapp_load_balancer.arn # Referencing our load balancer
   port              = "80"                                 # aksing listener to take HTTP connections on port 80 only
