@@ -2,13 +2,6 @@ module "vpc" {
   source = "./modules/vpc"
 }
 
-# module "sg" {
-#   source = "./modules/sg"
-
-#   vpc_id     = module.vpc.vpc_id
-#   depends_on = [module.vpc]
-# }
-
 module "alb" {
   source = "./modules/alb"
 
@@ -33,9 +26,9 @@ module "iam" {
   source = "./modules/iam"
 }
 
-# module "s3" {
-#   source = "./modules/s3"
-# }
+module "s3" {
+  source = "./modules/s3"
+}
 
 module "cloudwatch" {
   source = "./modules/cloudwatch"
