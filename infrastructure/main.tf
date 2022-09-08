@@ -26,8 +26,11 @@ module "iam" {
   source = "./modules/iam"
 }
 
-module "s3" {
+module "s3_bucket" {
   source = "./modules/s3"
+  bucket = var.bucket
+
+  tags = var.tags
 }
 
 module "cloudwatch" {
