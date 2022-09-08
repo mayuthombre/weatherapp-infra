@@ -22,6 +22,10 @@ module "alb" {
 
 }
 
+module "ecr" {
+  source = "./modules/ecr"
+}
+
 module "ecs" {
   source = "./modules/ecs"
 
@@ -31,6 +35,7 @@ module "ecs" {
   ecsTaskExecutionRole = module.iam.ecsTaskExecutionRole
   subnet_id            = [module.vpc.private_subnet_a, module.vpc.private_subnet_b, module.vpc.private_subnet_c]
   target_group         = module.alb.weatherapp_target_group
+  repo_url             = module.ecr.repo_url
 }
 
 module "iam" {

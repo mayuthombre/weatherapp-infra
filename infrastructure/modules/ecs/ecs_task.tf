@@ -5,7 +5,7 @@ resource "aws_ecs_task_definition" "weatherapp_ecstask" {
   [
     {
       "name": "${module.locals.name}-ecstask",
-      "image": "${aws_ecr_repository.weatherapp_ecrRepo.repository_url}",
+      "image": var.repo_url,
       "essential": true,
       "portMappings": [
         {

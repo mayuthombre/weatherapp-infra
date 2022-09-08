@@ -1,3 +1,7 @@
+module "locals" {
+  source = "../locals"
+}
+
 # Create ECR repository
 resource "aws_ecr_repository" "weatherapp_ecrRepo" {
   name         = "${module.locals.name}-repo" # Naming my repository
