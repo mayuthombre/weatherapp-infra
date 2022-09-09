@@ -13,7 +13,7 @@ resource "aws_vpc" "vpc" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-vpc"
+      name = "${var.name}-vpc"
     }
   )
 }
@@ -33,7 +33,7 @@ resource "aws_subnet" "pub_subnet_a" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-public-a"
+      name = "${var.name}-public-a"
       tier = "public"
     }
   )
@@ -49,7 +49,7 @@ resource "aws_subnet" "pub_subnet_b" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-public-b"
+      name = "${var.name}-public-b"
       tier = "public"
     }
   )
@@ -78,7 +78,7 @@ resource "aws_internet_gateway" "igw" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-igw"
+      name = "${var.name}-igw"
     }
   )
 }
@@ -96,7 +96,7 @@ resource "aws_route_table" "pub_rt_a" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-pubrt-a"
+      name = "${var.name}-pubrt-a"
     }
   )
 }
@@ -113,7 +113,7 @@ resource "aws_route_table" "pub_rt_b" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-pubrt-b"
+      name = "${var.name}-pubrt-b"
     }
   )
 }
@@ -130,7 +130,7 @@ resource "aws_route_table" "pub_rt_c" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-pubrt-c"
+      name = "${var.name}-pubrt-c"
     }
   )
 }
@@ -166,7 +166,7 @@ resource "aws_subnet" "private_subnet_a" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-private-a"
+      name = "${var.name}-private-a"
       tier = "private"
     }
   )
@@ -181,7 +181,7 @@ resource "aws_subnet" "private_subnet_b" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-private-b"
+      name = "${var.name}-private-b"
       tier = "private"
     }
   )
@@ -196,7 +196,7 @@ resource "aws_subnet" "private_subnet_c" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-private-c"
+      name = "${var.name}-private-c"
       tier = "private"
     }
   )
@@ -210,7 +210,7 @@ resource "aws_eip" "eip_ngw_a" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-eip-a"
+      name = "${var.name}-eip-a"
     }
   )
 }
@@ -221,7 +221,7 @@ resource "aws_eip" "eip_ngw_b" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-eip-b"
+      name = "${var.name}-eip-b"
     }
   )
 }
@@ -233,7 +233,7 @@ resource "aws_eip" "eip_ngw_c" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-eip-c"
+      name = "${var.name}-eip-c"
     }
   )
 }
@@ -250,7 +250,7 @@ resource "aws_nat_gateway" "nat_gateway_a" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-ngw-a"
+      name = "${var.name}-ngw-a"
     }
   )
 }
@@ -266,7 +266,7 @@ resource "aws_nat_gateway" "nat_gateway_b" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-ngw-b"
+      name = "${var.name}-ngw-b"
     }
   )
 }
@@ -282,7 +282,7 @@ resource "aws_nat_gateway" "nat_gateway_c" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-ngw-c"
+      name = "${var.name}-ngw-c"
     }
   )
 }
@@ -300,7 +300,7 @@ resource "aws_route_table" "private_rt_a" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-privrt-a"
+      name = "${var.name}-privrt-a"
     }
   )
 }
@@ -318,7 +318,7 @@ resource "aws_route_table" "private_rt_b" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-privrt-b"
+      name = "${var.name}-privrt-b"
     }
   )
 }
@@ -335,7 +335,7 @@ resource "aws_route_table" "private_rt_c" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-privrt-c"
+      name = "${var.name}-privrt-c"
     }
   )
 }

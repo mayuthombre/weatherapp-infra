@@ -24,10 +24,10 @@ resource "aws_cloudwatch_metric_alarm" "weatherapp-CPUuse" {
 
       # Define dimensions for this metric to track. Here we are tracking metric for ECS cluster & service
       dimensions = {
-        ClusterName = var.cluster_name
-        ServiceName = var.service_name
-        # ClusterName = aws_ecs_cluster.weatherapp-cluster.name,
-        # ServiceName = aws_ecs_service.weatherapp_ecsservice.name
+        Clustername = var.cluster_name
+        Servicename = var.service_name
+        # Clustername = aws_ecs_cluster.weatherapp-cluster.name,
+        # Servicename = aws_ecs_service.weatherapp_ecsservice.name
       }
 
     }
@@ -41,7 +41,7 @@ resource "aws_cloudwatch_metric_alarm" "weatherapp-CPUuse" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-cw"
+      name = "${var.name}-cw"
     }
   )
 }

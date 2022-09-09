@@ -1,8 +1,8 @@
 module "vpc" {
   source = "./modules/vpc"
 
-  tags = var.tags
-  name = var.name
+  tags           = var.tags
+  name           = var.name
   vpc_cidr       = var.vpc_cidr
   pub_cidr_a     = var.pub_cidr_a
   pub_cidr_b     = var.pub_cidr_b
@@ -18,8 +18,8 @@ module "vpc" {
 module "alb" {
   source = "./modules/alb"
 
-  tags = var.tags
-  name = var.name
+  tags       = var.tags
+  name       = var.name
   subnet_id  = [module.vpc.pub_subnet_id_a, module.vpc.pub_subnet_id_b, module.vpc.pub_subnet_id_c]
   vpc_id     = module.vpc.vpc_id
   depends_on = [module.vpc]
@@ -46,7 +46,7 @@ module "ecs" {
   source = "./modules/ecs"
 
   tags                 = var.tags
-  name = var.name
+  name                 = var.name
   vpc_id               = module.vpc.vpc_id
   depends_on           = [module.vpc]
   albsg_id             = module.alb.load_balancer_security_group
@@ -74,8 +74,8 @@ module "iam" {
 module "cloudwatch" {
   source = "./modules/cloudwatch"
 
-  tags = var.tags
-  name = var.name
+  tags                = var.tags
+  name                = var.name
   comparison_operator = var.comparison_operator
   evaluation_periods  = var.evaluation_periods
   threshhold          = var.threshhold

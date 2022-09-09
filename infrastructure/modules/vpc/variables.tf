@@ -66,5 +66,5 @@ variable "tags" {
 
 variable "name" {
   type = string
-  description = "Name for each resource"
+  description = "name for each resource"
 }

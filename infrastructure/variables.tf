@@ -11,8 +11,8 @@ variable "tags" {
 }
 
 variable "name" {
-  type = string
-  description = "Name for each resource"
+  type        = string
+  description = "name for each resource"
 }
 
 variable "vpc_cidr" {}

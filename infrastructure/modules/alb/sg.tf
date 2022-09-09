@@ -23,7 +23,7 @@ resource "aws_security_group" "load_balancer_security_group" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-ALB-sg"
+      name = "${var.name}-ALB-sg"
     }
   )
 }

@@ -33,7 +33,7 @@ resource "aws_lb_target_group" "weatherapp_target_group" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-tg"
+      name = "${var.name}-tg"
     }
   )
 }
@@ -52,7 +52,7 @@ resource "aws_lb_listener" "listener" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-listeners"
+      name = "${var.name}-listeners"
     }
   )
 }
