@@ -87,9 +87,9 @@ module "cloudwatch" {
   depends_on          = [module.ecs]
 }
 
-# module "route53" {
-#   source = "./modules/route53"
+module "route53" {
+  source = "./modules/route53"
 
-#   load_balancer_dns_name = module.alb.load_balancer_dns_name
-#   load_balancer_zone_id  = module.alb.load_balancer_zone_id
-# }
+  load_balancer_dns_name = module.alb.load_balancer_dns_name
+  load_balancer_zone_id  = module.alb.load_balancer_zone_id
+}
