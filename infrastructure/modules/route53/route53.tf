@@ -7,6 +7,7 @@ resource "aws_route53_record" "this" {
   zone_id = data.aws_route53_zone.primary.zone_id
   name    = var.resource_name_prefix
   type    = "A"
+  ttl     = 10
 
   alias {
     name                   = var.load_balancer_dns_name
