@@ -7,13 +7,11 @@ variable "comparison_operator" {
 variable "evaluation_periods" {
   type        = number
   description = "number of periods over which data is compared to the specified threshold"
-  default     = {}
 }
 
 variable "threshhold" {
   type        = number
   description = "value to compare with the specified statistic"
-  default     = ""
 }
 
 variable "cluster_name" {
