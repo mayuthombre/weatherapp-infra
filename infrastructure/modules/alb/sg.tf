@@ -21,9 +21,9 @@ resource "aws_security_group" "load_balancer_security_group" {
   
   
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-ALB-sg"
+      Name = "${var.name}-ALB-sg"
     }
   )
 }

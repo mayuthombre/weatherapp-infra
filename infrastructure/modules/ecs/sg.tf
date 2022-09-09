@@ -20,9 +20,9 @@ resource "aws_security_group" "service_security_group" {
   }
   
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-ECS-sg"
+      Name = "${var.name}-ECS-sg"
     }
   )
 }

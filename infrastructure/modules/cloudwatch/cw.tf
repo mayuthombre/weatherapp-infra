@@ -1,10 +1,10 @@
-module "locals" {
-  source = "../locals"
-}
+# module "locals" {
+#   source = "../locals"
+# }
 
 # Create a CloudWatch alarm for CPU utilsation to send email to subscribers
 resource "aws_cloudwatch_metric_alarm" "weatherapp-CPUuse" {
-  alarm_name                = "${module.locals.name}-cpuUtilisation"                      # name this Cloudwatch alarm
+  alarm_name                = "${var.name}-cpuUtilisation"                      # name this Cloudwatch alarm
   comparison_operator       = var.comparison_operator                       # Define the alarm condition
   evaluation_periods        = var.evaluation_periods                                                   # set how many data period to compare before triggering the alarm
   threshold                 = var.threshhold                                                  # define the threshhold value above/below which alarm will be triggered
@@ -39,9 +39,9 @@ resource "aws_cloudwatch_metric_alarm" "weatherapp-CPUuse" {
   alarm_actions = [aws_sns_topic.weatherapp-sns.arn]
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-cw"
+      Name = "${var.name}-cw"
     }
   )
 }

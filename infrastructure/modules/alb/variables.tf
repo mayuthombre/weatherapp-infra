@@ -10,3 +10,13 @@ variable "vpc_id" {
   description = "VPC ID to create these security groups within"
   default = {}
 }
+
+variable "tags" {
+  type = map(string)
+  description = "Use tags to identify project resources"
+}
+
+variable "name" {
+  type = string
+  description = "Name for each resource"
+}

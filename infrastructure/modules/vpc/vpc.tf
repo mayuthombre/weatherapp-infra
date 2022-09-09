@@ -1,6 +1,6 @@
-module "locals" {
-  source = "../locals"
-}
+# module "locals" {
+#   source = "../locals"
+# }
 
 
 # Create new VPC for weather app build
@@ -11,9 +11,9 @@ resource "aws_vpc" "vpc" {
 
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-vpc"
+      Name = "${var.name}-vpc"
     }
   )
 }
@@ -31,9 +31,9 @@ resource "aws_subnet" "pub_subnet_a" {
   map_public_ip_on_launch = true    # make this a public subnet. set to "false" if private subnet is needed
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-public-a"
+      Name = "${var.name}-public-a"
       tier = "public"
     }
   )
@@ -47,9 +47,9 @@ resource "aws_subnet" "pub_subnet_b" {
   map_public_ip_on_launch = true
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-public-b"
+      Name = "${var.name}-public-b"
       tier = "public"
     }
   )
@@ -63,9 +63,9 @@ resource "aws_subnet" "pub_subnet_c" {
   map_public_ip_on_launch = true
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-public-c"
+      name = "${var.name}-public-c"
       tier = "public"
     }
   )
@@ -76,9 +76,9 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id   # attaching internet gateway to above VPC
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-igw"
+      Name = "${var.name}-igw"
     }
   )
 }
@@ -94,9 +94,9 @@ resource "aws_route_table" "pub_rt_a" {
   }
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-pubrt-a"
+      Name = "${var.name}-pubrt-a"
     }
   )
 }
@@ -111,9 +111,9 @@ resource "aws_route_table" "pub_rt_b" {
   }
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-pubrt-b"
+      Name = "${var.name}-pubrt-b"
     }
   )
 }
@@ -128,9 +128,9 @@ resource "aws_route_table" "pub_rt_c" {
   }
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-pubrt-c"
+      Name = "${var.name}-pubrt-c"
     }
   )
 }
@@ -164,9 +164,9 @@ resource "aws_subnet" "private_subnet_a" {
   availability_zone       = var.az_a    # explain which availability zone to use for creating subnet
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-private-a"
+      Name = "${var.name}-private-a"
       tier = "private"
     }
   )
@@ -179,9 +179,9 @@ resource "aws_subnet" "private_subnet_b" {
   availability_zone       = var.az_b    # explain which availability zone to use for creating subnet
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-private-b"
+      Name = "${var.name}-private-b"
       tier = "private"
     }
   )
@@ -194,9 +194,9 @@ resource "aws_subnet" "private_subnet_c" {
   availability_zone       = var.az_c    # explain which availability zone to use for creating subnet
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-private-c"
+      Name = "${var.name}-private-c"
       tier = "private"
     }
   )
@@ -208,9 +208,9 @@ resource "aws_eip" "eip_ngw_a" {
   vpc = true
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-eip-a"
+      Name = "${var.name}-eip-a"
     }
   )
 }
@@ -219,9 +219,9 @@ resource "aws_eip" "eip_ngw_b" {
   vpc = true
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-eip-b"
+      Name = "${var.name}-eip-b"
     }
   )
 }
@@ -231,9 +231,9 @@ resource "aws_eip" "eip_ngw_c" {
   vpc = true
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-eip-c"
+      Name = "${var.name}-eip-c"
     }
   )
 }
@@ -248,9 +248,9 @@ resource "aws_nat_gateway" "nat_gateway_a" {
   ]
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-ngw-a"
+      Name = "${var.name}-ngw-a"
     }
   )
 }
@@ -264,9 +264,9 @@ resource "aws_nat_gateway" "nat_gateway_b" {
   ]
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-ngw-b"
+      Name = "${var.name}-ngw-b"
     }
   )
 }
@@ -280,9 +280,9 @@ resource "aws_nat_gateway" "nat_gateway_c" {
   ]
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-ngw-c"
+      Name = "${var.name}-ngw-c"
     }
   )
 }
@@ -298,9 +298,9 @@ resource "aws_route_table" "private_rt_a" {
   }
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-privrt-a"
+      Name = "${var.name}-privrt-a"
     }
   )
 }
@@ -316,9 +316,9 @@ resource "aws_route_table" "private_rt_b" {
   }
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-privrt-b"
+      Name = "${var.name}-privrt-b"
     }
   )
 }
@@ -333,9 +333,9 @@ resource "aws_route_table" "private_rt_c" {
   }
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-privrt-c"
+      Name = "${var.name}-privrt-c"
     }
   )
 }

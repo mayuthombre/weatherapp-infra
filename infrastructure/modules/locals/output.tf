@@ -1,12 +1,12 @@
-output "name" {
-  value = local.name
-}
+# output "name" {
+#   value = local.name
+# }
 
-output "region" {
-  value = local.region
-}
+# output "region" {
+#   value = local.region
+# }
 
 
-output "tags" {
-    value = local.tags
-}
+# output "tags" {
+#     value = local.tags
+# }

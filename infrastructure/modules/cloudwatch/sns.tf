@@ -1,14 +1,9 @@
 
 # Create a SNS topic that will be used to send notifications to subscribers
 resource "aws_sns_topic" "weatherapp-sns" {
-  name = "mayu-weatherapp-sns"
+  name = "${var.name}-sns"
 
-  tags = merge(
-    module.locals.tags,
-    {
-      Name = "${module.locals.name}-sns"
-    }
-  )
+  tags = var.tags
 }
 
 # Create a SNS topic subscription

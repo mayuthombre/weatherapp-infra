@@ -1,6 +1,6 @@
 # Create container service
 resource "aws_ecs_service" "weatherapp_ecsservice" {
-  name            = "${module.locals.name}-service"                # Naming our first service
+  name            = "${var.name}-service"                # Naming our first service
   cluster         = aws_ecs_cluster.weatherapp-cluster.id                         # Referencing our created Cluster
   task_definition = var.task_definition # Referencing the task our service will spin up
   launch_type     = "FARGATE"                                      # selecing our launch type for running tasks
@@ -21,5 +21,5 @@ resource "aws_ecs_service" "weatherapp_ecsservice" {
     security_groups  = ["${aws_security_group.service_security_group.id}"]                          # attach ECS security group
   }
 
-  tags = module.locals.tags
+  tags = var.tags
 }

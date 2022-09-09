@@ -1,13 +1,13 @@
-module "locals" {
-  source = "../locals"
-}
+# module "locals" {
+#   source = "../locals"
+# }
 
 # Create IAM role for the ECS task to be able to get image from ECR Repository
 resource "aws_iam_role" "ecsTaskExecutionRole" {
   name               = "MayuecsTaskExecutionRole" # Naming our role
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 
-  tags = module.locals.tags
+  tags = var.tags
 }
 
 data "aws_iam_policy_document" "assume_role_policy" {

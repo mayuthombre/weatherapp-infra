@@ -1,10 +1,10 @@
-module "locals" {
-  source = "../locals"
-}
+# module "locals" {
+#   source = "../locals"
+# }
 
 # create an application load balancer
 resource "aws_alb" "weatherapp_load_balancer" {
-  name = "${module.locals.name}-alb"
+  name = "${var.name}-alb"
   load_balancer_type = "application"
   # subnets = data.aws_subnets.public.ids
   subnets = var.subnet_id
@@ -12,12 +12,7 @@ resource "aws_alb" "weatherapp_load_balancer" {
   # Referencing the security group
   security_groups = ["${aws_security_group.load_balancer_security_group.id}"]
 
-  tags = merge(
-    module.locals.tags,
-    {
-      Name = "${module.locals.name}-alb"
-    }
-  )
+  tags = var.tags
 }
 
 
@@ -36,9 +31,9 @@ resource "aws_lb_target_group" "weatherapp_target_group" {
   }
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-tg"
+      Name = "${var.name}-tg"
     }
   )
 }
@@ -55,9 +50,9 @@ resource "aws_lb_listener" "listener" {
   }
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-listeners"
+      Name = "${var.name}-listeners"
     }
   )
 }

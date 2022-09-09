@@ -10,6 +10,11 @@ variable "tags" {
   default     = {}
 }
 
+variable "name" {
+  type = string
+  description = "Name for each resource"
+}
+
 variable "vpc_cidr" {}
 
 variable "pub_cidr_a" {}
@@ -39,3 +44,4 @@ variable "threshhold" {}
 variable "email" {}
 
 variable "resource_name_prefix" {}
+
