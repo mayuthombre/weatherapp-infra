@@ -18,7 +18,7 @@ resource "aws_security_group" "service_security_group" {
     protocol    = "-1"          # Allowing any outgoing protocol 
     cidr_blocks = ["0.0.0.0/0"] # Allowing traffic out to all IP addresses
   }
-  
+
   tags = merge(
     var.tags,
     {

@@ -18,8 +18,8 @@ resource "aws_security_group" "load_balancer_security_group" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"] # Allowing traffic out to all IP addresses
   }
-  
-  
+
+
   tags = merge(
     var.tags,
     {

@@ -1,22 +1,35 @@
 variable "load_balancer_security_group" {
-  default = {}
+  type        = string
+  description = "security group for load balancer"
+  default     = {}
 }
 
 variable "subnet_id" {
-  type = list(string)
+  type        = list(string)
+  description = "public subnet IDs fetched from VPC module"
+  default     = {}
 }
 
 variable "vpc_id" {
-  description = "VPC ID to create these security groups within"
-  default = {}
+  type        = string
+  description = "VPC ID to create these security group within"
+  default     = {}
 }
 
 variable "tags" {
-  type = map(string)
-  description = "Use tags to identify project resources"
+  type        = map(string)
+  description = "tags used to identify project resources"
+  default     = {}
 }
 
 variable "name" {
-  type = string
-  description = "name for each resource"
+  type        = string
+  description = "name prefix for resource"
+  default     = {}
+}
+
+variable "certificate_arn" {
+  type        = string
+  description = "certificate used to make load balancer secure"
+  default     = {}
 }

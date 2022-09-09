@@ -18,11 +18,12 @@ module "vpc" {
 module "alb" {
   source = "./modules/alb"
 
-  tags       = var.tags
-  name       = var.name
-  subnet_id  = [module.vpc.pub_subnet_id_a, module.vpc.pub_subnet_id_b, module.vpc.pub_subnet_id_c]
-  vpc_id     = module.vpc.vpc_id
-  depends_on = [module.vpc]
+  tags            = var.tags
+  name            = var.name
+  certificate_arn = var.certificate_arn
+  subnet_id       = [module.vpc.pub_subnet_id_a, module.vpc.pub_subnet_id_b, module.vpc.pub_subnet_id_c]
+  vpc_id          = module.vpc.vpc_id
+  depends_on      = [module.vpc]
 
 }
 
