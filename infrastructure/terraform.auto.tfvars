@@ -17,3 +17,6 @@ threshhold          = "20"
 
 # email where we want SNS alerts delivered
 email = "mayu.thombre@contino.io"
+
+# sub-domain name for route 53
+resource_name_prefix = "mayu"

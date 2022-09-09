@@ -37,3 +37,5 @@ variable "evaluation_periods" {}
 variable "threshhold" {}
 
 variable "email" {}
+
+variable "resource_name_prefix" {}

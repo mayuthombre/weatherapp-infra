@@ -31,7 +31,7 @@ module "ecr" {
 module "ecs_app" {
   source = "git::https://github.com/mayuthombre/weatherapp-app.git//infrastructure/modules/ecs?ref=master"
 
-  repo_url = module.ecr.repo_url
+  repo_url             = module.ecr.repo_url
   ecsTaskExecutionRole = module.iam.ecsTaskExecutionRole
 }
 
@@ -70,4 +70,11 @@ module "cloudwatch" {
   cluster_name        = module.ecs.cluster_name
   service_name        = module.ecs.service_name
   depends_on          = [module.ecs]
+}
+
+module "route53" {
+  source = "./modules/route53"
+
+  load_balancer_dns_name = module.alb.load_balancer_dns_name
+  load_balancer_zone_id  = module.alb.load_balancer_zone_id
 }
