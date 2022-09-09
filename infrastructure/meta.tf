@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 1.2.0"
   backend "s3" {
     bucket = "pathways-dojo"
-    key    = "mayu-tfstate-main"
+    key    = "mayu-tfstate-infra"
     region = "us-east-1"
   }
 }
