@@ -7,5 +7,5 @@ variable "tags" {
 variable "name" {
   type        = string
   description = "name for each resource"
-  default     = {}
+  default     = ""
 }

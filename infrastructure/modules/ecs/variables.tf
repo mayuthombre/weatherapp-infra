@@ -62,7 +62,7 @@ variable "task_definition" {
 variable "container_name" {
   type        = string
   description = "container name exported from another github repo"
-  default     = {}
+  default     = ""
 }
 
 variable "tags" {
@@ -73,4 +73,5 @@ variable "tags" {
 variable "name" {
   type        = string
   description = "name for each resource"
+  default     = ""
 }

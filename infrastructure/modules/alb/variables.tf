@@ -1,7 +1,7 @@
 variable "load_balancer_security_group" {
   type        = string
   description = "security group for load balancer"
-  default     = {}
+  default     = ""
 }
 
 variable "subnet_id" {
@@ -13,7 +13,7 @@ variable "subnet_id" {
 variable "vpc_id" {
   type        = string
   description = "VPC ID to create these security group within"
-  default     = {}
+  default     = ""
 }
 
 variable "tags" {
@@ -25,11 +25,11 @@ variable "tags" {
 variable "name" {
   type        = string
   description = "name prefix for resource"
-  default     = {}
+  default     = ""
 }
 
 variable "certificate_arn" {
   type        = string
   description = "certificate used to make load balancer secure"
-  default     = {}
+  default     = ""
 }

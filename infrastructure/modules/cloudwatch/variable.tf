@@ -1,37 +1,37 @@
 variable "comparison_operator" {
   type        = string
   description = "arithmetic operation to use when comparing the specified statistic and threshold"
-  default     = {}
+  default     = ""
 }
 
 variable "evaluation_periods" {
   type        = number
   description = "number of periods over which data is compared to the specified threshold"
-  default     = {}
+  default     = ""
 }
 
 variable "threshhold" {
   type        = number
   description = "value to compare with the specified statistic"
-  default     = {}
+  default     = ""
 }
 
 variable "cluster_name" {
   type        = string
   description = "cluster that will be monitored by cloudwatch"
-  default     = {}
+  default     = ""
 }
 
 variable "service_name" {
   type        = string
   description = "service name that will be monitored by cloudwatch"
-  default     = {}
+  default     = ""
 }
 
 variable "email" {
   type        = string
   description = "email addres to send email notification"
-  default     = {}
+  default     = ""
 }
 
 variable "tags" {
@@ -43,5 +43,5 @@ variable "tags" {
 variable "name" {
   type        = string
   description = "name prefix for each resource"
-  default     = {}
+  default     = ""
 }
