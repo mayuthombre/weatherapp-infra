@@ -26,6 +26,12 @@ module "ecr" {
   source = "./modules/ecr"
 }
 
+# calling app repo ECS module
+
+module "ecs_app" {
+  source = "git::https://github.com/mayuthombre/weatherapp-app.git//infrastructure/modules/ecs?ref=master"
+}
+
 module "ecs" {
   source = "./modules/ecs"
 
@@ -36,6 +42,8 @@ module "ecs" {
   subnet_id            = [module.vpc.private_subnet_a, module.vpc.private_subnet_b, module.vpc.private_subnet_c]
   target_group         = module.alb.weatherapp_target_group
   repo_url             = module.ecr.repo_url
+  task_definition      = module.ecs_app.task_definition
+  container_name       = module.ecs_app.container_name
 }
 
 module "iam" {
