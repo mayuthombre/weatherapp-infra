@@ -5,7 +5,7 @@ data "aws_route53_zone" "primary" {
 
 resource "aws_route53_record" "this" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "${var.resource_name_prefix}.weatherapp.click"
+  name    = var.resource_name_prefix
   type    = "A"
 
   alias {
