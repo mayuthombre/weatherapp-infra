@@ -1,7 +1,7 @@
 variable "bucket" {
   type        = string
   description = "Specifies the name of an S3 Bucket"
-  default     = "mayu-pathway-dojo-weatherapp-s3"
+  default     = "mayu-pathway-dojo-weatherapp-infra-s3"
 }
 
 variable "tags" {
