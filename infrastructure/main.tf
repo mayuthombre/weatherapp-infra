@@ -30,6 +30,9 @@ module "ecr" {
 
 module "ecs_app" {
   source = "git::https://github.com/mayuthombre/weatherapp-app.git//infrastructure/modules/ecs?ref=master"
+
+  repo_url = module.ecr.repo_url
+  ecsTaskExecutionRole = module.iam.ecsTaskExecutionRole
 }
 
 module "ecs" {
