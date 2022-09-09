@@ -7,7 +7,7 @@ variable "comparison_operator" {
 variable "evaluation_periods" {
   type        = number
   description = "number of periods over which data is compared to the specified threshold"
-  default     = ""
+  default     = {}
 }
 
 variable "threshhold" {

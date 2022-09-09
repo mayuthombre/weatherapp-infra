@@ -7,7 +7,7 @@ variable "load_balancer_security_group" {
 variable "subnet_id" {
   type        = list(string)
   description = "public subnet IDs fetched from VPC module"
-  default     = {}
+  default     = ""
 }
 
 variable "vpc_id" {
