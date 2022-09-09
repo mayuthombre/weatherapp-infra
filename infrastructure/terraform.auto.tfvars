@@ -19,7 +19,7 @@ threshhold          = "20"
 email = "mayu.thombre@contino.io"
 
 # sub-domain name for route 53
-resource_name_prefix = "www"
+resource_name_prefix = "mayu"
 
 # standardised tags that will be used across all the resources that support tagging
 tags = {
