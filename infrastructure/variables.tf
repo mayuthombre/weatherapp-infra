@@ -106,3 +106,8 @@ variable "resource_name_prefix" {
   default     = ""
 }
 
+variable "certificate_arn" {
+  type = string
+  description = "certificate ARN generated from AWS console"
+  default = ""
+}
