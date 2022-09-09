@@ -48,6 +48,8 @@ variable "subnet_id" {
 
 variable "target_group" {}
 
-variable "repo_url" {
-  
-}
+variable "repo_url" {}
+
+variable "task_definition" {}
+
+variable "container_name" {}
