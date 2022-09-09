@@ -117,7 +117,7 @@ The `modules` folder allows you to organise your `.tf` files are called by `main
   <summary>Click to expand</summary>
 
 
-| Name | Description | Type | Default | Required |
+| name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | bucket | S3 bucket name - must be globally unique | string | my-tf-test-bucket7717 | yes |
 | tags | Tags to be applied to AWS resources| map(string) | `null` | no |
@@ -133,7 +133,7 @@ The `modules` folder allows you to organise your `.tf` files are called by `main
 <details open>
   <summary>Click to expand</summary>
 
-| Name | Description |
+| name | Description |
 |------|-------------|
 | bucket_name | The name of the S3 Bucket. | |
 | bucket_name_arn | The ARN of the S3 Bucket. | |

@@ -1,29 +1,19 @@
-module "locals" {
-  source = "../locals"
-}
-
 # create an application load balancer
 resource "aws_alb" "weatherapp_load_balancer" {
-  name = "${module.locals.name}-alb"
+  name               = "${var.name}-alb"
   load_balancer_type = "application"
-  # subnets = data.aws_subnets.public.ids
-  subnets = var.subnet_id
+  subnets            = var.subnet_id
 
   # Referencing the security group
   security_groups = ["${aws_security_group.load_balancer_security_group.id}"]
 
-  tags = merge(
-    module.locals.tags,
-    {
-      Name = "${module.locals.name}-alb"
-    }
-  )
+  tags = var.tags
 }
 
 
 # Creating a target group for the load balancer:
 resource "aws_lb_target_group" "weatherapp_target_group" {
-  port        = 3000                           # port to take connection requests on
+  port        = 3000 # port to take connection requests on
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.vpc_id # Referencing the VPC
@@ -36,9 +26,9 @@ resource "aws_lb_target_group" "weatherapp_target_group" {
   }
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-tg"
+      Name = "${var.name}-tg"
     }
   )
 }
@@ -48,16 +38,16 @@ resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_alb.weatherapp_load_balancer.arn # Referencing our load balancer
   port              = "80"                                 # aksing listener to take HTTP connections on port 80 only
   protocol          = "HTTP"
-  # certificate_arn = aws_acm_certificate.cert.arn
+  # certificate_arn   = var.certificate_arn
   default_action {
     type             = "forward"                                       # forward rule from listener to target group
     target_group_arn = aws_lb_target_group.weatherapp_target_group.arn # Referencing our tagrte group
   }
 
   tags = merge(
-    module.locals.tags,
+    var.tags,
     {
-      Name = "${module.locals.name}-listeners"
+      name = "${var.name}-listeners"
     }
   )
 }

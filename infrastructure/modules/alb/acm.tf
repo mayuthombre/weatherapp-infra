@@ -5,7 +5,7 @@
 #   tags = merge(
 #     module.locals.tags,
 #     {
-#       Name = "${module.locals.name}-certificate"
+#       name = "${module.locals.name}-certificate"
 #     }
 #   )
 

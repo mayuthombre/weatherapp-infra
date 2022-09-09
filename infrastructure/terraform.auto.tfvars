@@ -17,3 +17,21 @@ threshhold          = "20"
 
 # email where we want SNS alerts delivered
 email = "mayu.thombre@contino.io"
+
+# sub-domain name for route 53
+resource_name_prefix = "mayu"
+
+# standardised tags that will be used across all the resources that support tagging
+tags = {
+  owner       = "mayu"
+  build       = "weatherapp"
+  iac         = "terraform"
+  program     = "dojo"
+  environment = "dev"
+}
+
+# stanadrd prefix for resources names
+name = "mayu-weatherapp"
+
+#certificate ARN
+certificate_arn = "arn:aws:acm:us-east-1:152848913167:certificate/8b9f49b1-2f2b-45f7-a740-22b7f27aa0dc"

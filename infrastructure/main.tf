@@ -1,6 +1,8 @@
 module "vpc" {
   source = "./modules/vpc"
 
+  tags           = var.tags
+  name           = var.name
   vpc_cidr       = var.vpc_cidr
   pub_cidr_a     = var.pub_cidr_a
   pub_cidr_b     = var.pub_cidr_b
@@ -16,14 +18,20 @@ module "vpc" {
 module "alb" {
   source = "./modules/alb"
 
-  subnet_id  = [module.vpc.pub_subnet_id_a, module.vpc.pub_subnet_id_b, module.vpc.pub_subnet_id_c]
-  vpc_id     = module.vpc.vpc_id
-  depends_on = [module.vpc]
+  tags            = var.tags
+  name            = var.name
+  certificate_arn = var.certificate_arn
+  subnet_id       = [module.vpc.pub_subnet_id_a, module.vpc.pub_subnet_id_b, module.vpc.pub_subnet_id_c]
+  vpc_id          = module.vpc.vpc_id
+  depends_on      = [module.vpc]
 
 }
 
 module "ecr" {
   source = "./modules/ecr"
+
+  tags = var.tags
+  name = var.name
 }
 
 # calling app repo ECS module
@@ -31,13 +39,17 @@ module "ecr" {
 module "ecs_app" {
   source = "git::https://github.com/mayuthombre/weatherapp-app.git//infrastructure/modules/ecs?ref=master"
 
-  repo_url = module.ecr.repo_url
+  tags                 = var.tags
+  name                 = var.name
+  repo_url             = module.ecr.repo_url
   ecsTaskExecutionRole = module.iam.ecsTaskExecutionRole
 }
 
 module "ecs" {
   source = "./modules/ecs"
 
+  tags                 = var.tags
+  name                 = var.name
   vpc_id               = module.vpc.vpc_id
   depends_on           = [module.vpc]
   albsg_id             = module.alb.load_balancer_security_group
@@ -51,18 +63,22 @@ module "ecs" {
 
 module "iam" {
   source = "./modules/iam"
-}
-
-module "s3_bucket" {
-  source = "./modules/s3"
-  bucket = var.bucket
 
   tags = var.tags
 }
 
+# module "s3_bucket" {
+#   source = "./modules/s3"
+#   bucket = var.bucket
+
+#   tags = var.tags
+# }
+
 module "cloudwatch" {
   source = "./modules/cloudwatch"
 
+  tags                = var.tags
+  name                = var.name
   comparison_operator = var.comparison_operator
   evaluation_periods  = var.evaluation_periods
   threshhold          = var.threshhold
@@ -70,4 +86,11 @@ module "cloudwatch" {
   cluster_name        = module.ecs.cluster_name
   service_name        = module.ecs.service_name
   depends_on          = [module.ecs]
+}
+
+module "route53" {
+  source = "./modules/route53"
+
+  load_balancer_dns_name = module.alb.load_balancer_dns_name
+  load_balancer_zone_id  = module.alb.load_balancer_zone_id
 }

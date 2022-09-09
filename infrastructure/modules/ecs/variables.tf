@@ -1,55 +1,78 @@
 variable "weatherapp-cluster" {
-  default = {}
+  type        = string
+  description = "cluster name described in tfvars file in main folder"
+  default     = ""
 }
 
 variable "ecsTaskExecutionRole" {
-  default = {}
+  type        = string
+  description = "IAM role called from IAM module"
+  default     = ""
 }
 
 variable "weatherapp_target_group" {
-  default = {}
-}
-
-
-# private subnet IDs
-variable "private_subnet_a" {
-  description = "public subnet a"
-  default = {}
-}
-
-variable "private_subnet_b" {
-  description = "public subnet b"
-  default = {}
-}
-
-variable "private_subnet_c" {
-  description = "public subnet c"
-  default = {}
-}
-
-
-# security group
-variable "service_security_group" {
-  default = {}
-}
-
-variable "vpc_id" {
-  description = "VPC ID to create these security groups within"
-  default = {}
-}
-
-variable "albsg_id" {
-  default = {}
+  type        = string
+  description = "load balancer target group value called from ALB module"
+  default = ""
 }
 
 variable "subnet_id" {
-  type = list(string)
+  type        = list(string)
+  description = "public subnet IDs fetched from VPC module"
+  default = [ "" ]
 }
 
-variable "target_group" {}
+variable "service_security_group" {
+  type        = string
+  description = "security group if required"
+  default = ""
+}
 
-variable "repo_url" {}
+variable "vpc_id" {
+  type        = string
+  description = "VPC ID to create these security groups within fetched from VPC module"
+  default = ""
+}
 
-variable "task_definition" {}
+variable "albsg_id" {
+  type        = string
+  description = "ALB security group ID exported from ALB moduke"
+  default     = ""
+}
 
-variable "container_name" {}
+
+variable "target_group" {
+  type        = string
+  description = "load balancer target group exported from ALB module"
+  default = ""
+}
+
+variable "repo_url" {
+  type        = string
+  description = "ECR repo url exported from ECR module"
+  default = ""
+}
+
+variable "task_definition" {
+  type        = string
+  description = "task definition exported from another github repo"
+  default = ""
+}
+
+variable "container_name" {
+  type        = string
+  description = "container name exported from another github repo"
+  default = ""
+}
+
+variable "tags" {
+  type        = map(string)
+  description = "Use tags to identify project resources"
+  default = {}
+}
+
+variable "name" {
+  type        = string
+  description = "name for each resource"
+  default = ""
+}
