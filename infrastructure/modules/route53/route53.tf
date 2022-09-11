@@ -16,15 +16,15 @@ resource "aws_route53_record" "domain" {
   }
 }
 
-# # Generage certificate for domain name using ACM
-# resource "aws_acm_certificate" "certificate" {
-#   domain_name       = aws_route53_record.domain.name
-#   validation_method = "DNS"
+# Generage certificate for domain name using ACM
+resource "aws_acm_certificate" "certificate" {
+  domain_name       = aws_route53_record.domain.name
+  validation_method = "DNS"
 
-#   depends_on = [
-#     aws_route53_record.domain
-#   ]
-# }
+  depends_on = [
+    aws_route53_record.domain
+  ]
+}
 
 
 # # Create record entry for CNAME in the hosted zone weatherapp.click
