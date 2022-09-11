@@ -51,3 +51,28 @@ resource "aws_lb_listener" "listener" {
     }
   )
 }
+
+# Forward traffic coming to port 80 onto port 443
+
+resource "aws_lb_listener" "http" {
+  load_balancer_arn = aws_alb.weatherapp_load_balancer.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+
+  tags = merge(
+    var.tags,
+    {
+      name = "${var.name}-redirectRule"
+    }
+  )
+}
