@@ -17,6 +17,6 @@ variable "load_balancer_zone_id" {
   default     = ""
 }
 
-variable "dvo" {
+# variable "dvo" {
  
-}
+# }
