@@ -36,7 +36,7 @@ resource "aws_lb_target_group" "weatherapp_target_group" {
 # Create listener for port 80
 resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_alb.weatherapp_load_balancer.arn # Referencing our load balancer
-  port              = "443"                                 # aksing listener to take HTTP connections on port 80 only
+  port              = "443"                                # aksing listener to take HTTP connections on port 80 only
   protocol          = "HTTPS"
   certificate_arn   = var.certificate_arn
   default_action {
@@ -55,15 +55,15 @@ resource "aws_lb_listener" "listener" {
 # Forward traffic coming to port 80 onto port 443
 
 resource "aws_lb_listener" "http" {
-  load_balancer_arn = aws_alb.weatherapp_load_balancer.arn
-  port              = "80"
+  load_balancer_arn = aws_alb.weatherapp_load_balancer.arn # Referencing our load balancer
+  port              = "80"                                 # aksing listener to take HTTP connections on port 80 only
   protocol          = "HTTP"
 
   default_action {
-    type = "redirect"
+    type = "redirect" # redirect rule 
 
     redirect {
-      port        = "443"
+      port        = "443" # redirect listner port
       protocol    = "HTTPS"
       status_code = "HTTP_301"
     }
