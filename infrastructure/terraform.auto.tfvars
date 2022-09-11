@@ -19,7 +19,7 @@ threshhold          = "20"
 email = "mayu.thombre@contino.io"
 
 # sub-domain name for route 53
-resource_name_prefix = "mayu"
+resource_name_prefix = "weatherapp.click"
 
 # standardised tags that will be used across all the resources that support tagging
 tags = {
@@ -34,4 +34,4 @@ tags = {
 name = "mayu-weatherapp"
 
 #certificate ARN
-certificate_arn = "arn:aws:acm:us-east-1:152848913167:certificate/8b9f49b1-2f2b-45f7-a740-22b7f27aa0dc"
+certificate_arn = "arn:aws:acm:us-east-1:152848913167:certificate/55bf11e1-242d-45d8-a85f-a2e177a85eba"

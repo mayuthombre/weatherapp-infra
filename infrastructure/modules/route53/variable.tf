@@ -16,3 +16,7 @@ variable "load_balancer_zone_id" {
   description = "zone_id exported from load balancer module"
   default     = ""
 }
+
+# variable "dvo" {
+ 
+# }
