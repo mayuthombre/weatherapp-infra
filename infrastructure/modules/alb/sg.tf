@@ -11,6 +11,13 @@ resource "aws_security_group" "load_balancer_security_group" {
     cidr_blocks = ["0.0.0.0/0"] # Allowing traffic in from all sources
   }
 
+  ingress {
+    from_port   = 443 # Allowing traffic in from port 80
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Allowing traffic in from all sources
+  }
+
   # Allow all outgoing traffic
   egress {
     from_port   = 0
@@ -23,7 +30,7 @@ resource "aws_security_group" "load_balancer_security_group" {
   tags = merge(
     var.tags,
     {
-      name = "${var.name}-ALB-sg"
+      Name = "${var.name}-ALB-sg"
     }
   )
 }
