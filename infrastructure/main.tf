@@ -67,12 +67,6 @@ module "iam" {
   tags = var.tags
 }
 
-# module "s3_bucket" {
-#   source = "./modules/s3"
-#   bucket = var.bucket
-
-#   tags = var.tags
-# }
 
 module "cloudwatch" {
   source = "./modules/cloudwatch"
