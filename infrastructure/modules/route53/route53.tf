@@ -1,5 +1,5 @@
 data "aws_route53_zone" "primary" {
-  name         = var.resource_name_prefix
+  name         = "weatherapp.click"
   private_zone = false
 }
 
