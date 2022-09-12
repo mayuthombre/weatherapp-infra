@@ -16,7 +16,7 @@ resource "aws_route53_record" "domain" {
   }
 }
 
-# Generage certificate for domain name using ACM
+# Generate certificate for domain name using ACM
 resource "aws_acm_certificate" "certificate" {
   domain_name       = aws_route53_record.domain.name
   validation_method = "DNS"
