@@ -3,7 +3,7 @@ terraform {
   backend "s3" {
     bucket = "pathways-dojo"
     key    = "mayu-tfstate-main"
-    region = "ap-southeast-2"
+    region = "us-east-1"
   }
 }
 

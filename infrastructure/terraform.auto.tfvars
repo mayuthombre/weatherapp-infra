@@ -34,4 +34,4 @@ tags = {
 name = "mayu-weatherapp"
 
 #certificate ARN
-certificate_arn = "arn:aws:acm:us-east-1:152848913167:certificate/55bf11e1-242d-45d8-a85f-a2e177a85eba"
+certificate_arn = "arn:aws:acm:ap-southeast-2:152848913167:certificate/17bc7119-e995-4936-b634-f5ca1b2c2c27"
