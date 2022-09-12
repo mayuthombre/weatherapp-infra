@@ -6,9 +6,9 @@ pub_cidr_c     = "10.0.0.48/28"
 private_cidr_a = "10.0.0.64/26"
 private_cidr_b = "10.0.0.128/26"
 private_cidr_c = "10.0.0.192/26"
-az_a           = "us-east-1a"
-az_b           = "us-east-1b"
-az_c           = "us-east-1c"
+az_a           = "ap-southeast-2a"
+az_b           = "ap-southeast-2b"
+az_c           = "ap-southeast-2c"
 
 # input variables for cloudwatch
 comparison_operator = "GreaterThanOrEqualToThreshold"
