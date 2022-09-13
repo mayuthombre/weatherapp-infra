@@ -152,7 +152,7 @@ terraform {
   backend "s3" {
     bucket = "pathways-dojo"
     key    = <username>-tfstate
-    region = "us-east-1"
+    region = "ap-southeast-2"
   }
 }
 ```

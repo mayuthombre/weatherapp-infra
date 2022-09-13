@@ -1,9 +1,5 @@
-# module "locals" {
-#   source = "../locals"
-# }
-
 # Create ECR repository
-resource "aws_ecr_repository" "weatherapp_ecrRepo" {
+resource "aws_ecr_repository" "weatherapp_ecrrepo" {
   name         = "mayu-weatherapp-repo" # Naming my repository
   force_delete = true               # enabling this feature so that github actions can delete repo with images.           
 
