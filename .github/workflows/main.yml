@@ -27,7 +27,7 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: example/examplea
+          directory: infrastructure
           framework: terraform 
 
   terraform_plan:
