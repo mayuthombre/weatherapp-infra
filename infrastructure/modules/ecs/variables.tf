@@ -76,3 +76,9 @@ variable "name" {
   description = "name for each resource"
   default = ""
 }
+
+variable "cpu_scale_up" {
+  type = number
+  description = "max CPU utilisation for scale up policy to kick in"
+  default = 70
+}
