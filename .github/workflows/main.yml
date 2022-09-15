@@ -2,7 +2,7 @@ name: Deploy
 on:
   workflow_dispatch:
     branches:
-      - test
+      - master
   push:
     branches:
       - master
