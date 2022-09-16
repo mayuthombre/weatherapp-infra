@@ -107,13 +107,13 @@ variable "resource_name_prefix" {
 }
 
 variable "certificate_arn" {
-  type = string
+  type        = string
   description = "certificate ARN generated from AWS console"
-  default = ""
+  default     = ""
 }
 
 variable "region" {
-  type = string
+  type        = string
   description = "Region in which AWS resources will be created"
-  default = ""
+  default     = ""
 }
