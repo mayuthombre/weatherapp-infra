@@ -111,3 +111,9 @@ variable "certificate_arn" {
   description = "certificate ARN generated from AWS console"
   default = ""
 }
+
+variable "region" {
+  type = string
+  description = "Region in which AWS resources will be created"
+  default = ""
+}
