@@ -4,14 +4,10 @@ resource "aws_vpc_endpoint" "s3" {
   service_name = "com.amazonaws.${var.region}.s3"
   vpc_endpoint_type = "Gateway"
   
-  tags = merge(
-    var.tags,
-    {
-        Name = "${var.name}-ecs"
-    }
-  )
+  tags = var.tags
 }
 
+# Create ECS endpoint
 resource "aws_vpc_endpoint" "ecs" {
   vpc_id       = aws_vpc.vpc.id
   service_name = "com.amazonaws.${var.region}.ecs"
