@@ -13,6 +13,7 @@ module "vpc" {
   az_a           = var.az_a
   az_b           = var.az_b
   az_c           = var.az_c
+  region = var.region
 }
 
 module "alb" {
