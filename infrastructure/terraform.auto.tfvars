@@ -36,5 +36,3 @@ tags = {
 # stanadrd prefix for resources names
 name = "mayu-weatherapp"
 
-#certificate ARN
-# certificate_arn = "arn:aws:acm:ap-southeast-2:152848913167:certificate/17bc7119-e995-4936-b634-f5ca1b2c2c27"

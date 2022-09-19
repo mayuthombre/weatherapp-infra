@@ -24,6 +24,8 @@ resource "aws_acm_certificate" "certificate" {
   depends_on = [
     aws_route53_record.domain
   ]
+
+  tags = var.tags
 }
 
 
