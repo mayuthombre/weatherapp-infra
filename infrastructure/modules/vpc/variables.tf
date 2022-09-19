@@ -71,3 +71,9 @@ variable "name" {
   description = "name for each resource"
   default     = ""
 }
+
+variable "region" {
+  type = string
+  description = "region where we want the endpoints created"
+  default = ""
+}

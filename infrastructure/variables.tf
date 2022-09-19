@@ -117,3 +117,10 @@ variable "region" {
   description = "Region in which AWS resources will be created"
   default     = ""
 }
+
+# domain name
+variable "domain_name" {
+  type        = string
+  description = "domain name that will be used to access the application"
+  default     = ""
+}

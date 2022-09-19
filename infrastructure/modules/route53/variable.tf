@@ -17,6 +17,21 @@ variable "load_balancer_zone_id" {
   default     = ""
 }
 
-# variable "dvo" {
- 
-# }
+# domain name
+variable "domain_name" {
+  type        = string
+  description = "domain name that will be used to access the application"
+  default     = ""
+}
+
+variable "tags" {
+  type        = map(string)
+  description = "Use tags to identify project resources"
+  default     = {}
+}
+
+variable "name" {
+  type        = string
+  description = "name for each resource"
+  default     = ""
+}

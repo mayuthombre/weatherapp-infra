@@ -13,6 +13,7 @@ module "vpc" {
   az_a           = var.az_a
   az_b           = var.az_b
   az_c           = var.az_c
+  region         = var.region
 }
 
 module "alb" {
@@ -20,11 +21,10 @@ module "alb" {
 
   tags            = var.tags
   name            = var.name
-  certificate_arn = var.certificate_arn
   subnet_id       = [module.vpc.pub_subnet_id_a, module.vpc.pub_subnet_id_b, module.vpc.pub_subnet_id_c]
   vpc_id          = module.vpc.vpc_id
   depends_on      = [module.vpc]
-
+  certificate_arn = module.route53.certificate_arn
 }
 
 module "ecr" {
@@ -39,8 +39,6 @@ module "ecr" {
 module "ecs_app" {
   source = "git::https://github.com/mayuthombre/weatherapp-app.git//infrastructure/modules/ecs?ref=master"
 
-  # tags                 = var.tags
-  # name                 = var.name
   repo_url             = module.ecr.repo_url
   ecsTaskExecutionRole = module.iam.ecsTaskExecutionRole
 }
@@ -85,6 +83,7 @@ module "cloudwatch" {
 module "route53" {
   source = "./modules/route53"
 
+  domain_name            = var.domain_name
   load_balancer_dns_name = module.alb.load_balancer_dns_name
   load_balancer_zone_id  = module.alb.load_balancer_zone_id
 }
