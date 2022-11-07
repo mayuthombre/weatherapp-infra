@@ -4,8 +4,8 @@ region = "ap-southeast-2"
 # Required input variables for complete networking
 vpc_cidr                 = "10.0.0.0/24"
 az_count                 = 3
-public_subnet_cidr_bits  = 8
-private_subnet_cidr_bits = 8
+public_subnet_cidr_bits  = 4
+private_subnet_cidr_bits = 2
 # pub_cidr_a     = "10.0.0.16/28"
 # pub_cidr_b     = "10.0.0.32/28"
 # pub_cidr_c     = "10.0.0.48/28"
