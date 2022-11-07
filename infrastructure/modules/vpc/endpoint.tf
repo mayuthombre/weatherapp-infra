@@ -22,9 +22,8 @@ resource "aws_vpc_endpoint" "blue_ecs" {
   vpc_id            = aws_vpc.blue_vpc.id
   service_name      = "com.amazonaws.${var.region}.ecs"
   vpc_endpoint_type = "Interface"
-  subnet_ids = [
-    aws_subnet.blue_private_subnet.*.id
-  ]
+  subnet_ids =     aws_subnet.blue_private_subnet.*.id
+
 
   tags = merge(
     var.tags,
@@ -57,9 +56,7 @@ resource "aws_vpc_endpoint" "green_ecs" {
   vpc_id            = aws_vpc.green_vpc.id
   service_name      = "com.amazonaws.${var.region}.ecs"
   vpc_endpoint_type = "Interface"
-  subnet_ids = [
-    aws_subnet.green_private_subnet.*.id
-  ]
+  subnet_ids = aws_subnet.green_private_subnet.*.id
 
   tags = merge(
     var.tags,
