@@ -81,7 +81,7 @@ resource "aws_route_table_association" "blue_public" {
 resource "aws_subnet" "blue_private_subnet" {
   vpc_id                  = aws_vpc.blue_vpc.id # attaching subnet to above VPC
   count                   = var.az_count
-  cidr_block              = cidrsubnet(aws_vpc.blue_vpc.ipv6_cidr_block, var.private_subnet_cidr_bits, count.index + var.az_count) # CIDR block as per project instruction
+  cidr_block              = cidrsubnet(aws_vpc.blue_vpc.cidr_block, var.private_subnet_cidr_bits, count.index + var.az_count) # CIDR block as per project instruction
   availability_zone       = data.aws_availability_zones.available.names[count.index]                                               # explain which availability zone to use for creating subnet
   map_public_ip_on_launch = false
 
