@@ -1,31 +1,32 @@
-# # outout VPC ID to be used for security group creation
-# output "vpc_id" {
-#   description = "VPC ID"
-#   value       = aws_vpc.vpc.id
-# }
+# outout VPC ID to be used for security group creation
+output "blue_vpc_id" {
+  description = "VPC ID"
+  value       = aws_vpc.blue_vpc.id
+}
 
-# # output public subnets IDs to be used for creating ALB
-# output "pub_subnet_id_a" {
-#   value = aws_subnet.pub_subnet_a.id
-# }
+# output public subnets IDs to be used for creating ALB
+output "blue_pubic_subnets" {
+  value = aws_subnet.blue_pubic_subnet.*.id
+}
 
-# output "pub_subnet_id_b" {
-#   value = aws_subnet.pub_subnet_b.id
-# }
+# output private subnets IDs to be used for creating ECS service that will deploy containers in private subnet
+output "blue_private_subnets" {
+  value = aws_subnet.blue_private_subnet.*.id
+}
 
-# output "pub_subnet_id_c" {
-#   value = aws_subnet.pub_subnet_c.id
-# }
 
-# # output private subnets IDs to be used for creating ECS service that will deploy containers in private subnet
-# output "private_subnet_a" {
-#   value = aws_subnet.private_subnet_a.id
-# }
+# outout VPC ID to be used for security group creation
+output "green_vpc_id" {
+  description = "VPC ID"
+  value       = aws_vpc.green_vpc.id
+}
 
-# output "private_subnet_b" {
-#   value = aws_subnet.private_subnet_b.id
-# }
+# output public subnets IDs to be used for creating ALB
+output "green_pubic_subnets" {
+  value = aws_subnet.green_pubic_subnet.*.id
+}
 
-# output "private_subnet_c" {
-#   value = aws_subnet.private_subnet_c.id
-# }
+# output private subnets IDs to be used for creating ECS service that will deploy containers in private subnet
+output "green_private_subnets" {
+  value = aws_subnet.green_private_subnet.*.id
+}

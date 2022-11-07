@@ -1,4 +1,4 @@
-# Create new VPC for weather app build
+# Create blue VPC for weather app build
 resource "aws_vpc" "blue_vpc" {
   cidr_block           = var.vpc_cidr # CIDR block as per project instructions
   enable_dns_support   = "true"
@@ -15,7 +15,7 @@ resource "aws_vpc" "blue_vpc" {
 
 #==== Availability Zones ======#
 
-data "aws_availability_zones" "available" {
+data "aws_availability_zones" "blue_available" {
   all_availability_zones = true
 }
 
@@ -25,7 +25,7 @@ resource "aws_subnet" "blue_pubic_subnet" {
   vpc_id                  = aws_vpc.blue_vpc.id # attaching subnet to above VPC
   count                   = var.az_count
   cidr_block              = cidrsubnet(aws_vpc.blue_vpc.cidr_block, var.public_subnet_cidr_bits, count.index) # CIDR block as per project instruction
-  availability_zone       = data.aws_availability_zones.available.names[count.index]                          # explain which availability zone to use for creating subnet
+  availability_zone       = data.aws_availability_zones.blue_available.names[count.index]                          # explain which availability zone to use for creating subnet
   map_public_ip_on_launch = true                                                                              # make this a public subnet. set to "false" if private subnet is needed
 
   tags = merge(
@@ -82,7 +82,7 @@ resource "aws_subnet" "blue_private_subnet" {
   vpc_id                  = aws_vpc.blue_vpc.id # attaching subnet to above VPC
   count                   = var.az_count
   cidr_block              = cidrsubnet(aws_vpc.blue_vpc.cidr_block, var.private_subnet_cidr_bits, count.index + var.az_count) # CIDR block as per project instruction
-  availability_zone       = data.aws_availability_zones.available.names[count.index]                                               # explain which availability zone to use for creating subnet
+  availability_zone       = data.aws_availability_zones.blue_available.names[count.index]                                          # explain which availability zone to use for creating subnet
   map_public_ip_on_launch = false
 
   tags = merge(
