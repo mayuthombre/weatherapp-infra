@@ -22,24 +22,6 @@ variable "vpc_cidr" {
   default     = ""
 }
 
-variable "pub_cidr_a" {
-  type        = string
-  description = "CIDR block range for public subnet"
-  default     = ""
-}
-
-variable "pub_cidr_b" {
-  type        = string
-  description = "CIDR block range for public subnet"
-  default     = ""
-}
-
-variable "pub_cidr_c" {
-  type        = string
-  description = "CIDR block range for public subnet"
-  default     = ""
-}
-
 variable "private_cidr_a" {
   type        = string
   description = "CIDR block range for private subnet"
@@ -122,5 +104,23 @@ variable "region" {
 variable "domain_name" {
   type        = string
   description = "domain name that will be used to access the application"
+  default     = ""
+}
+
+variable "az_count" {
+  type        = string
+  description = "The number of Availability zones needed."
+  default     = ""
+}
+
+variable "public_subnet_cidr_bits" {
+  type        = string
+  description = "he number of subnet bits for the CIDR. For example, specifying a value 8 for this parameter will create a CIDR with a mask of /24."
+  default     = ""
+}
+
+variable "private_subnet_cidr_bits" {
+  type        = string
+  description = "he number of subnet bits for the CIDR. For example, specifying a value 8 for this parameter will create a CIDR with a mask of /24."
   default     = ""
 }

@@ -1,78 +1,81 @@
 module "vpc" {
   source = "./modules/vpc"
 
-  tags           = var.tags
-  name           = var.name
-  vpc_cidr       = var.vpc_cidr
-  pub_cidr_a     = var.pub_cidr_a
-  pub_cidr_b     = var.pub_cidr_b
-  pub_cidr_c     = var.pub_cidr_c
-  private_cidr_a = var.private_cidr_a
-  private_cidr_b = var.private_cidr_b
-  private_cidr_c = var.private_cidr_c
-  az_a           = var.az_a
-  az_b           = var.az_b
-  az_c           = var.az_c
-  region         = var.region
+  tags                     = var.tags
+  name                     = var.name
+  vpc_cidr                 = var.vpc_cidr
+  az_count                 = var.az_count
+  public_subnet_cidr_bits  = var.public_subnet_cidr_bits
+  private_subnet_cidr_bits = var.private_subnet_cidr_bits
+  # pub_cidr_a     = var.pub_cidr_a
+  # pub_cidr_b     = var.pub_cidr_b
+  # pub_cidr_c     = var.pub_cidr_c
+  # private_cidr_a = var.private_cidr_a
+  # private_cidr_b = var.private_cidr_b
+  # private_cidr_c = var.private_cidr_c
+  # az_a           = var.az_a
+  # az_b           = var.az_b
+  # az_c           = var.az_c
+  # region         = var.region
 }
 
-module "alb" {
-  source = "./modules/alb"
+# module "alb" {
+#   source = "./modules/alb"
 
-  tags            = var.tags
-  name            = var.name
-  subnet_id       = [module.vpc.pub_subnet_id_a, module.vpc.pub_subnet_id_b, module.vpc.pub_subnet_id_c]
-  vpc_id          = module.vpc.vpc_id
-  depends_on      = [module.vpc]
-  certificate_arn = module.route53.certificate_arn
-}
+#   tags            = var.tags
+#   name            = var.name
+#   subnet_id       = [module.vpc.pub_subnet_id_a, module.vpc.pub_subnet_id_b, module.vpc.pub_subnet_id_c]
+#   vpc_id          = module.vpc.vpc_id
+#   depends_on      = [module.vpc]
+#   certificate_arn = module.route53.certificate_arn
+# }
 
-module "ecr" {
-  source = "./modules/ecr"
+# module "ecr" {
+#   source = "./modules/ecr"
 
-  tags = var.tags
-  name = var.name
-}
+#   tags = var.tags
+#   name = var.name
+# }
 
-module "ecs" {
-  source = "./modules/ecs"
+# module "ecs" {
+#   source = "./modules/ecs"
 
-  tags                 = var.tags
-  name                 = var.name
-  vpc_id               = module.vpc.vpc_id
-  depends_on           = [module.vpc]
-  albsg_id             = module.alb.load_balancer_security_group
-  ecsTaskExecutionRole = module.iam.ecsTaskExecutionRole
-  subnet_id            = [module.vpc.private_subnet_a, module.vpc.private_subnet_b, module.vpc.private_subnet_c]
-  target_group         = module.alb.weatherapp_target_group
-  repo_url             = module.ecr.repo_url
-}
+#   tags                 = var.tags
+#   name                 = var.name
+#   vpc_id               = module.vpc.vpc_id
+#   depends_on           = [module.vpc]
+#   albsg_id             = module.alb.load_balancer_security_group
+#   ecsTaskExecutionRole = module.iam.ecsTaskExecutionRole
+#   subnet_id            = [module.vpc.private_subnet_a, module.vpc.private_subnet_b, module.vpc.private_subnet_c]
+#   target_group         = module.alb.weatherapp_target_group
+#   repo_url             = module.ecr.repo_url
+# }
 
-module "iam" {
-  source = "./modules/iam"
+# module "iam" {
+#   source = "./modules/iam"
 
-  tags = var.tags
-}
+#   tags = var.tags
+# }
 
 
-module "cloudwatch" {
-  source = "./modules/cloudwatch"
+# module "cloudwatch" {
+#   source = "./modules/cloudwatch"
 
-  tags                = var.tags
-  name                = var.name
-  comparison_operator = var.comparison_operator
-  evaluation_periods  = var.evaluation_periods
-  threshhold          = var.threshhold
-  email               = var.email
-  cluster_name        = module.ecs.cluster_name
-  service_name        = module.ecs.service_name
-  depends_on          = [module.ecs]
-}
+#   tags                = var.tags
+#   name                = var.name
+#   comparison_operator = var.comparison_operator
+#   evaluation_periods  = var.evaluation_periods
+#   threshhold          = var.threshhold
+#   email               = var.email
+#   cluster_name        = module.ecs.cluster_name
+#   service_name        = module.ecs.service_name
+#   depends_on          = [module.ecs]
+# }
 
-module "route53" {
-  source = "./modules/route53"
+# module "route53" {
+#   source = "./modules/route53"
 
-  domain_name            = var.domain_name
-  load_balancer_dns_name = module.alb.load_balancer_dns_name
-  load_balancer_zone_id  = module.alb.load_balancer_zone_id
-}
+#   domain_name            = var.domain_name
+#   load_balancer_dns_name = module.alb.load_balancer_dns_name
+#   load_balancer_zone_id  = module.alb.load_balancer_zone_id
+# }
