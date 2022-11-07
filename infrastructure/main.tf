@@ -7,6 +7,7 @@ module "vpc" {
   az_count                 = var.az_count
   public_subnet_cidr_bits  = var.public_subnet_cidr_bits
   private_subnet_cidr_bits = var.private_subnet_cidr_bits
+  region = var.region
   # pub_cidr_a     = var.pub_cidr_a
   # pub_cidr_b     = var.pub_cidr_b
   # pub_cidr_c     = var.pub_cidr_c
