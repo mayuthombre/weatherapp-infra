@@ -15,7 +15,7 @@ resource "aws_cloudwatch_metric_alarm" "weatherapp-CPUuse" {
       metric_name = "CPUUtilization" # name for this metric
       namespace   = "AWS/ECS"        # namespace for this metric. see AWS docs for list of namespaces
       period      = "60"             # period in seconds over which the specified stat is applied
-      stat        = "Sum"        # statistic to apply to this metric
+      stat        = "Sum"            # statistic to apply to this metric
       unit        = "Percent"        # unit for this metric
 
       # Define dimensions for this metric to track. Here we are tracking metric for ECS cluster & service

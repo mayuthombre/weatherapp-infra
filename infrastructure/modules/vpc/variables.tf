@@ -73,7 +73,7 @@ variable "name" {
 }
 
 variable "region" {
-  type = string
+  type        = string
   description = "region where we want the endpoints created"
-  default = ""
+  default     = ""
 }
