@@ -40,25 +40,25 @@ resource "aws_lb_target_group" "blue_weatherapp_target_group" {
   )
 }
 
-# Create listener for port 80
-resource "aws_lb_listener" "blue_listener" {
-  load_balancer_arn = aws_alb.blue_weatherapp.arn # Referencing our load balancer
-  port              = "443"                       # aksing listener to take HTTP connections on port 80 only
-  protocol          = "HTTPS"
-  certificate_arn   = var.certificate_arn
+# # Create listener for port 443
+# resource "aws_lb_listener" "blue_listener" {
+#   load_balancer_arn = aws_alb.blue_weatherapp.arn # Referencing our load balancer
+#   port              = "443"                       # aksing listener to take HTTP connections on port 80 only
+#   protocol          = "HTTPS"
+#   certificate_arn   = var.certificate_arn
 
-  default_action {
-    type             = "forward"                                            # forward rule from listener to target group
-    target_group_arn = aws_lb_target_group.blue_weatherapp_target_group.arn # Referencing our tagrte group
-  }
+#   default_action {
+#     type             = "forward"                                            # forward rule from listener to target group
+#     target_group_arn = aws_lb_target_group.blue_weatherapp_target_group.arn # Referencing our tagrte group
+#   }
 
-  tags = merge(
-    var.tags,
-    {
-      name = "${var.name}-bluelisteners"
-    }
-  )
-}
+#   tags = merge(
+#     var.tags,
+#     {
+#       name = "${var.name}-bluelisteners"
+#     }
+#   )
+# }
 
 # Forward traffic coming to port 80 onto port 443
 
@@ -67,20 +67,20 @@ resource "aws_lb_listener" "blue_http" {
   port              = "80"                        # aksing listener to take HTTP connections on port 80 only
   protocol          = "HTTP"
 
-  default_action {
-    type = "redirect" # redirect rule 
-
-    redirect {
-      port        = "443" # redirect listner port
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-
   # default_action {
-  #   type             = "forward"                                            # forward rule from listener to target group
-  #   target_group_arn = aws_lb_target_group.blue_weatherapp_target_group.arn # Referencing our tagrte group
+  #   type = "redirect" # redirect rule 
+
+  #   redirect {
+  #     port        = "443" # redirect listner port
+  #     protocol    = "HTTPS"
+  #     status_code = "HTTP_301"
+  #   }
   # }
+
+  default_action {
+    type             = "forward"                                            # forward rule from listener to target group
+    target_group_arn = aws_lb_target_group.blue_weatherapp_target_group.arn # Referencing our tagrte group
+  }
 
   tags = merge(
     var.tags,
