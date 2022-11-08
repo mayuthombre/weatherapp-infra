@@ -19,13 +19,13 @@ module "iam" {
 module "alb" {
   source = "./modules/alb"
 
-  tags            = var.tags
-  name            = var.name
-  blue_pubic_subnets = module.vpc.blue_pubic_subnets
+  tags                = var.tags
+  name                = var.name
+  blue_pubic_subnets  = module.vpc.blue_pubic_subnets
   green_pubic_subnets = module.vpc.green_pubic_subnets
   # subnet_id       = [module.vpc.pub_subnet_id_a, module.vpc.pub_subnet_id_b, module.vpc.pub_subnet_id_c]
-  blue_vpc_id          = module.vpc.blue_vpc_id
-  green_vpc_id = module.vpc.green_vpc_id
+  blue_vpc_id     = module.vpc.blue_vpc_id
+  green_vpc_id    = module.vpc.green_vpc_id
   depends_on      = [module.vpc]
   certificate_arn = module.route53.certificate_arn
 }
@@ -33,11 +33,11 @@ module "alb" {
 module "route53" {
   source = "./modules/route53"
 
-  domain_name            = var.domain_name
-  blue_load_balancer_dns_name = module.alb.blue_load_balancer_dns_name
+  domain_name                  = var.domain_name
+  blue_load_balancer_dns_name  = module.alb.blue_load_balancer_dns_name
   green_load_balancer_dns_name = module.alb.green_load_balancer_dns_name
-  blue_load_balancer_zone_id  = module.alb.blue_load_balancer_zone_id
-  green_load_balancer_zone_id = module.alb.green_load_balancer_zone_id
+  blue_load_balancer_zone_id   = module.alb.blue_load_balancer_zone_id
+  green_load_balancer_zone_id  = module.alb.green_load_balancer_zone_id
 }
 
 module "ecr" {
@@ -47,19 +47,24 @@ module "ecr" {
   name = var.name
 }
 
-# module "ecs" {
-#   source = "./modules/ecs"
+module "ecs" {
+  source = "./modules/ecs"
 
-#   tags                 = var.tags
-#   name                 = var.name
-#   vpc_id               = module.vpc.vpc_id
-#   depends_on           = [module.vpc]
-#   albsg_id             = module.alb.load_balancer_security_group
-#   ecsTaskExecutionRole = module.iam.ecsTaskExecutionRole
-#   subnet_id            = [module.vpc.private_subnet_a, module.vpc.private_subnet_b, module.vpc.private_subnet_c]
-#   target_group         = module.alb.weatherapp_target_group
-#   repo_url             = module.ecr.repo_url
-# }
+  tags                          = var.tags
+  name                          = var.name
+  blue_vpc_id                   = module.vpc.blue_vpc_id
+  green_vpc_id                  = module.vpc.green_vpc_id
+  depends_on                    = [module.vpc]
+  blue_lb_sg                    = module.alb.blue_lb_sg
+  green_lb_sg                   = module.alb.green_lb_sg
+  ecsTaskExecutionRole          = module.iam.ecsTaskExecutionRole
+  blue_private_subnets            = module.vpc.blue_private_subnets
+  green_private_subnets         = module.vpc.green_private_subnets
+  blue_weatherapp_target_group  = module.alb.blue_weatherapp_target_group
+  green_weatherapp_target_group = module.alb.green_weatherapp_target_group
+  blue_repo_url                 = module.ecr.blue_repo_url
+  green_repo_url                = module.ecr.green_repo_url
+}
 
 
 # module "cloudwatch" {

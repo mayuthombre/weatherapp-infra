@@ -10,8 +10,8 @@ resource "aws_route53_record" "domain" {
   type    = "A"
 
   alias {
-    name                   = var.blue_load_balancer_dns_name # attaching load balancer
-    zone_id                = var.blue_load_balancer_zone_id
+    name    = var.blue_load_balancer_dns_name # attaching load balancer
+    zone_id = var.blue_load_balancer_zone_id
     # name                   = var.green_load_balancer_dns_name # attaching load balancer
     # zone_id                = var.green_load_balancer_zone_id
     evaluate_target_health = true

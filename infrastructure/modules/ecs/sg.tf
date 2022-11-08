@@ -1,7 +1,10 @@
 # Create a security group for ECS that will allow traffic only from ALB. i.e. no public internet access
-resource "aws_security_group" "service_security_group" {
-  description = "security group for ECS"
-  vpc_id      = var.vpc_id
+
+#==== Blue Security group for ECS ====#
+
+resource "aws_security_group" "blue_ecs_sg" {
+  description = "security group for ECS - Blue"
+  vpc_id      = var.blue_vpc_id
 
   # Allow incoming traffic only from the ALB
   ingress {
@@ -9,7 +12,7 @@ resource "aws_security_group" "service_security_group" {
     to_port   = 0
     protocol  = "-1"
     # Only allowing traffic in from the load balancer security group
-    security_groups = [var.albsg_id]
+    security_groups = [var.blue_lb_sg]
   }
 
   egress {
@@ -22,7 +25,37 @@ resource "aws_security_group" "service_security_group" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-ECS-sg"
+      Name = "${var.name}-blueECS-sg"
+    }
+  )
+}
+
+#==== Green Security group for ECS ====#
+
+resource "aws_security_group" "green_ecs_sg" {
+  description = "security group for ECS - green"
+  vpc_id      = var.green_vpc_id
+
+  # Allow incoming traffic only from the ALB
+  ingress {
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
+    # Only allowing traffic in from the load balancer security group
+    security_groups = [var.green_lb_sg]
+  }
+
+  egress {
+    from_port   = 0             # Allowing any incoming port
+    to_port     = 0             # Allowing any outgoing port
+    protocol    = "-1"          # Allowing any outgoing protocol 
+    cidr_blocks = ["0.0.0.0/0"] # Allowing traffic out to all IP addresses
+  }
+
+  tags = merge(
+    var.tags,
+    {
+      Name = "${var.name}-greenECS-sg"
     }
   )
 }
