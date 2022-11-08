@@ -19,14 +19,14 @@ module "iam" {
 module "alb" {
   source = "./modules/alb"
 
-  tags                = var.tags
-  name                = var.name
-  blue_pubic_subnets  = [module.vpc.blue_pubic_subnets]
-  green_pubic_subnets = [module.vpc.green_pubic_subnets]
+  tags            = var.tags
+  name            = var.name
+  blue_pubic_subnets = module.vpc.blue_pubic_subnets
+  green_pubic_subnets = module.vpc.green_pubic_subnets
   # subnet_id       = [module.vpc.pub_subnet_id_a, module.vpc.pub_subnet_id_b, module.vpc.pub_subnet_id_c]
-  blue_vpc_id  = module.vpc.blue_vpc_id
+  blue_vpc_id          = module.vpc.blue_vpc_id
   green_vpc_id = module.vpc.green_vpc_id
-  depends_on   = [module.vpc]
+  depends_on      = [module.vpc]
   # certificate_arn = module.route53.certificate_arn
 }
 
