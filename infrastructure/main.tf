@@ -54,16 +54,16 @@ module "ecs" {
   name                          = var.name
   blue_vpc_id                   = module.vpc.blue_vpc_id
   green_vpc_id                  = module.vpc.green_vpc_id
-  depends_on                    = [module.vpc]
   blue_lb_sg                    = module.alb.blue_lb_sg
   green_lb_sg                   = module.alb.green_lb_sg
   ecsTaskExecutionRole          = module.iam.ecsTaskExecutionRole
-  blue_private_subnets            = module.vpc.blue_private_subnets
+  blue_private_subnets          = module.vpc.blue_private_subnets
   green_private_subnets         = module.vpc.green_private_subnets
   blue_weatherapp_target_group  = module.alb.blue_weatherapp_target_group
   green_weatherapp_target_group = module.alb.green_weatherapp_target_group
   blue_repo_url                 = module.ecr.blue_repo_url
   green_repo_url                = module.ecr.green_repo_url
+  depends_on                    = [module.vpc]
 }
 
 
