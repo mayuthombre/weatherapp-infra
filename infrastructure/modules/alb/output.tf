@@ -1,24 +1,33 @@
-# target group ARN which will be used by the ECS service
-output "weatherapp_target_group" {
-  value = aws_lb_target_group.weatherapp_target_group.arn
+# Target group ARN which will be used by the ECS service
+output "blue_weatherapp_target_group" {
+  value = aws_lb_target_group.blue_weatherapp_target_group.arn
+}
+
+output "green_weatherapp_target_group" {
+  value = aws_lb_target_group.green_weatherapp_target_group.arn
 }
 
 # load balancer security group for input to ecs security group
-output "load_balancer_security_group" {
-  value = aws_security_group.load_balancer_security_group.id
+output "blue_lb_sg" {
+  value = aws_security_group.blue_lb_sg.id
 }
 
-# target group to be used by ecs service
-output "target_group_arn" {
-  value = aws_lb_target_group.weatherapp_target_group.arn
+output "green_lb_sg" {
+  value = aws_security_group.green_lb_sg.id
 }
+
 
 # dns_name to be used by route53
-output "load_balancer_dns_name" {
-  value = aws_alb.weatherapp_load_balancer.dns_name
+output "blue_load_balancer_dns_name" {
+  value = aws_alb.blue_weatherapp.dns_name
 }
 
+output "green_load_balancer_dns_name" {
+  value = aws_alb.green_weatherapp.dns_name
+}
+
+
 # zone_id to be used by route53
-output "load_balancer_zone_id" {
-  value = aws_alb.weatherapp_load_balancer.zone_id
+output "green_load_balancer_zone_id" {
+  value = aws_alb.green_weatherapp.zone_id
 }

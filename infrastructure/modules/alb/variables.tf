@@ -10,7 +10,13 @@ variable "subnet_id" {
   default     = [""]
 }
 
-variable "vpc_id" {
+variable "blue_vpc_id" {
+  type        = string
+  description = "VPC ID to create these security group within"
+  default     = ""
+}
+
+variable "green_vpc_id" {
   type        = string
   description = "VPC ID to create these security group within"
   default     = ""
@@ -32,4 +38,16 @@ variable "certificate_arn" {
   type        = string
   description = "certificate used to make load balancer secure"
   default     = ""
+}
+
+variable "blue_pubic_subnets" {
+  type = list(string)
+  description = "public subnet ID"
+  default = [ "" ]
+}
+
+variable "green_pubic_subnets" {
+  type = list(string)
+  description = "public subnet ID"
+  default = [ "" ]
 }

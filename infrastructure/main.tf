@@ -7,29 +7,28 @@ module "vpc" {
   az_count                 = var.az_count
   public_subnet_cidr_bits  = var.public_subnet_cidr_bits
   private_subnet_cidr_bits = var.private_subnet_cidr_bits
-  region = var.region
-  # pub_cidr_a     = var.pub_cidr_a
-  # pub_cidr_b     = var.pub_cidr_b
-  # pub_cidr_c     = var.pub_cidr_c
-  # private_cidr_a = var.private_cidr_a
-  # private_cidr_b = var.private_cidr_b
-  # private_cidr_c = var.private_cidr_c
-  # az_a           = var.az_a
-  # az_b           = var.az_b
-  # az_c           = var.az_c
-  # region         = var.region
+  region                   = var.region
 }
 
-# module "alb" {
-#   source = "./modules/alb"
+module "iam" {
+  source = "./modules/iam"
 
-#   tags            = var.tags
-#   name            = var.name
-#   subnet_id       = [module.vpc.pub_subnet_id_a, module.vpc.pub_subnet_id_b, module.vpc.pub_subnet_id_c]
-#   vpc_id          = module.vpc.vpc_id
-#   depends_on      = [module.vpc]
-#   certificate_arn = module.route53.certificate_arn
-# }
+  tags = var.tags
+}
+
+module "alb" {
+  source = "./modules/alb"
+
+  tags            = var.tags
+  name            = var.name
+  blue_pubic_subnets = [module.vpc.blue_pubic_subnets]
+  green_pubic_subnets = [module.vpc.green_pubic_subnets]
+  # subnet_id       = [module.vpc.pub_subnet_id_a, module.vpc.pub_subnet_id_b, module.vpc.pub_subnet_id_c]
+  blue_vpc_id          = module.vpc.blue_vpc_id
+  green_vpc_id = module.vpc.green_vpc_id
+  depends_on      = [module.vpc]
+  # certificate_arn = module.route53.certificate_arn
+}
 
 # module "ecr" {
 #   source = "./modules/ecr"

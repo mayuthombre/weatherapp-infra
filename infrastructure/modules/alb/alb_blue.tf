@@ -1,22 +1,29 @@
 # create an application load balancer
-resource "aws_alb" "weatherapp_load_balancer" {
-  name               = "${var.name}-alb"
+
+#==== Blue Load balancer ====#
+resource "aws_alb" "blue_weatherapp" {
+  name               = "${var.name}-bluealb"
   load_balancer_type = "application"
-  subnets            = var.subnet_id
+  subnets            = var.blue_pubic_subnets
 
   # Referencing the security group
-  security_groups = ["${aws_security_group.load_balancer_security_group.id}"]
+  security_groups = ["${aws_security_group.blue_lb_sg.id}"]
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      environment = "blue"
+    }
+  )
 }
 
 
 # Creating a target group for the load balancer:
-resource "aws_lb_target_group" "weatherapp_target_group" {
+resource "aws_lb_target_group" "blue_weatherapp_target_group" {
   port        = 3000 # port to take connection requests on
   protocol    = "HTTP"
   target_type = "ip"
-  vpc_id      = var.vpc_id # Referencing the VPC
+  vpc_id      = var.blue_vpc_id # Referencing the blue VPC
   health_check {
     matcher  = "200"
     path     = "/"
@@ -28,34 +35,34 @@ resource "aws_lb_target_group" "weatherapp_target_group" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-tg"
+      Name = "${var.name}-bluetg"
     }
   )
 }
 
 # Create listener for port 80
-resource "aws_lb_listener" "listener" {
-  load_balancer_arn = aws_alb.weatherapp_load_balancer.arn # Referencing our load balancer
+resource "aws_lb_listener" "blue_listener" {
+  load_balancer_arn = aws_alb.blue_weatherapp.arn # Referencing our load balancer
   port              = "443"                                # aksing listener to take HTTP connections on port 80 only
   protocol          = "HTTPS"
-  certificate_arn   = var.certificate_arn
+  # certificate_arn   = var.certificate_arn
   default_action {
     type             = "forward"                                       # forward rule from listener to target group
-    target_group_arn = aws_lb_target_group.weatherapp_target_group.arn # Referencing our tagrte group
+    target_group_arn = aws_lb_target_group.blue_weatherapp_target_group.arn # Referencing our tagrte group
   }
 
   tags = merge(
     var.tags,
     {
-      name = "${var.name}-listeners"
+      name = "${var.name}-bluelisteners"
     }
   )
 }
 
 # Forward traffic coming to port 80 onto port 443
 
-resource "aws_lb_listener" "http" {
-  load_balancer_arn = aws_alb.weatherapp_load_balancer.arn # Referencing our load balancer
+resource "aws_lb_listener" "blue_http" {
+  load_balancer_arn = aws_alb.blue_weatherapp.arn # Referencing our load balancer
   port              = "80"                                 # aksing listener to take HTTP connections on port 80 only
   protocol          = "HTTP"
 
@@ -72,7 +79,7 @@ resource "aws_lb_listener" "http" {
   tags = merge(
     var.tags,
     {
-      name = "${var.name}-redirectRule"
+      name = "${var.name}-blueredirectRule"
     }
   )
 }

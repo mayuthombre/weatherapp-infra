@@ -40,24 +40,6 @@ variable "private_cidr_c" {
   default     = ""
 }
 
-variable "az_a" {
-  type        = string
-  description = "availability zone"
-  default     = ""
-}
-
-variable "az_b" {
-  type        = string
-  description = "availability zone"
-  default     = ""
-}
-
-variable "az_c" {
-  type        = string
-  description = "availability zone"
-  default     = ""
-}
-
 variable "comparison_operator" {
   type        = string
   description = "arithmetic operation to use when comparing the specified statistic and threshold"
@@ -123,4 +105,9 @@ variable "private_subnet_cidr_bits" {
   type        = string
   description = "he number of subnet bits for the CIDR. For example, specifying a value 8 for this parameter will create a CIDR with a mask of /24."
   default     = ""
+}
+
+variable "blue_pubic_subnets" {
+  type = string
+  description = "subnet ID imported from VPC module"
 }
