@@ -4,10 +4,10 @@
 # }
 
 # Certificate ARN output to be used by the application load balancer (ALB)
-output "blue_certificate_arn" {
-  value = aws_acm_certificate.blue_certificate.arn
+output "certificate_arn" {
+  value = aws_acm_certificate.certificate.arn
 }
 
-output "green_certificate_arn" {
-  value = aws_acm_certificate.green_certificate.arn
-}
+# output "green_certificate_arn" {
+#   value = aws_acm_certificate.green_certificate.arn
+# }

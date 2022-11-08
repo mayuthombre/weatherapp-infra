@@ -4,7 +4,7 @@ data "aws_route53_zone" "primary" {
 }
 
 # create route 53 record 
-resource "aws_route53_record" "blue_domain" {
+resource "aws_route53_record" "domain" {
   zone_id = data.aws_route53_zone.primary.zone_id
   name    = var.resource_name_prefix
   type    = "A"
@@ -12,17 +12,19 @@ resource "aws_route53_record" "blue_domain" {
   alias {
     name                   = var.blue_load_balancer_dns_name # attaching load balancer
     zone_id                = var.blue_load_balancer_zone_id
+    # name                   = var.green_load_balancer_dns_name # attaching load balancer
+    # zone_id                = var.green_load_balancer_zone_id
     evaluate_target_health = true
   }
 }
 
 # Generate certificate for domain name using ACM
-resource "aws_acm_certificate" "blue_certificate" {
+resource "aws_acm_certificate" "certificate" {
   domain_name       = data.aws_route53_zone.primary.name
   validation_method = "DNS"
 
   depends_on = [
-    aws_route53_record.blue_domain
+    aws_route53_record.domain
   ]
 
   tags = var.tags
@@ -30,9 +32,9 @@ resource "aws_acm_certificate" "blue_certificate" {
 
 
 # Create record entry for CNAME in the hosted zone weatherapp.click
-resource "aws_route53_record" "blue_certificate" {
+resource "aws_route53_record" "certificate" {
   for_each = {
-    for dvo in aws_acm_certificate.blue_certificate.domain_validation_options : dvo.domain_name => {
+    for dvo in aws_acm_certificate.certificate.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
@@ -49,11 +51,11 @@ resource "aws_route53_record" "blue_certificate" {
 
 
 # Certificate validation
-resource "aws_acm_certificate_validation" "blue_validation" {
-  certificate_arn         = aws_acm_certificate.blue_certificate.arn
-  validation_record_fqdns = [for record in aws_route53_record.blue_certificate : record.fqdn]
+resource "aws_acm_certificate_validation" "validation" {
+  certificate_arn         = aws_acm_certificate.certificate.arn
+  validation_record_fqdns = [for record in aws_route53_record.certificate : record.fqdn]
 
   depends_on = [
-    aws_route53_record.blue_certificate
+    aws_route53_record.certificate
   ]
 }

@@ -45,7 +45,8 @@ resource "aws_lb_listener" "green_listener" {
   load_balancer_arn = aws_alb.green_weatherapp.arn # Referencing our load balancer
   port              = "443"                        # aksing listener to take HTTP connections on port 80 only
   protocol          = "HTTPS"
-  certificate_arn   = var.green_certificate_arn
+  # certificate_arn   = var.certificate_arn
+  
   default_action {
     type             = "forward"                                             # forward rule from listener to target group
     target_group_arn = aws_lb_target_group.green_weatherapp_target_group.arn # Referencing our tagrte group
@@ -66,15 +67,21 @@ resource "aws_lb_listener" "green_http" {
   port              = "80"                         # aksing listener to take HTTP connections on port 80 only
   protocol          = "HTTP"
 
-  default_action {
-    type = "redirect" # redirect rule 
 
-    redirect {
-      port        = "443" # redirect listner port
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
+ default_action {
+    type             = "forward"                                             # forward rule from listener to target group
+    target_group_arn = aws_lb_target_group.green_weatherapp_target_group.arn # Referencing our tagrte group
   }
+
+  # default_action {
+  #   type = "redirect" # redirect rule 
+
+  #   redirect {
+  #     port        = "443" # redirect listner port
+  #     protocol    = "HTTPS"
+  #     status_code = "HTTP_301"
+  #   }
+  # }
 
   tags = merge(
     var.tags,

@@ -27,8 +27,7 @@ module "alb" {
   blue_vpc_id          = module.vpc.blue_vpc_id
   green_vpc_id = module.vpc.green_vpc_id
   depends_on      = [module.vpc]
-  blue_certificate_arn = module.route53.blue_certificate_arn
-  green_certificate_arn = module.route53.green_certificate_arn
+  certificate_arn = module.route53.certificate_arn
 }
 
 module "route53" {

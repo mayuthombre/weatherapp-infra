@@ -34,7 +34,7 @@ variable "name" {
   default     = ""
 }
 
-variable "blue_certificate_arn" {
+variable "certificate_arn" {
   type        = string
   description = "certificate used to make load balancer secure"
   default     = ""
@@ -50,10 +50,4 @@ variable "green_pubic_subnets" {
   type        = list(string)
   description = "public subnet ID"
   default     = [""]
-}
-
-variable "green_certificate_arn" {
-  type        = string
-  description = "certificate used to make load balancer secure"
-  default     = ""
 }
