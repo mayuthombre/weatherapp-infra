@@ -43,11 +43,11 @@ resource "aws_lb_target_group" "blue_weatherapp_target_group" {
 # Create listener for port 80
 resource "aws_lb_listener" "blue_listener" {
   load_balancer_arn = aws_alb.blue_weatherapp.arn # Referencing our load balancer
-  port              = "443"                                # aksing listener to take HTTP connections on port 80 only
+  port              = "443"                       # aksing listener to take HTTP connections on port 80 only
   protocol          = "HTTPS"
   # certificate_arn   = var.certificate_arn
   default_action {
-    type             = "forward"                                       # forward rule from listener to target group
+    type             = "forward"                                            # forward rule from listener to target group
     target_group_arn = aws_lb_target_group.blue_weatherapp_target_group.arn # Referencing our tagrte group
   }
 
@@ -63,7 +63,7 @@ resource "aws_lb_listener" "blue_listener" {
 
 resource "aws_lb_listener" "blue_http" {
   load_balancer_arn = aws_alb.blue_weatherapp.arn # Referencing our load balancer
-  port              = "80"                                 # aksing listener to take HTTP connections on port 80 only
+  port              = "80"                        # aksing listener to take HTTP connections on port 80 only
   protocol          = "HTTP"
 
   default_action {

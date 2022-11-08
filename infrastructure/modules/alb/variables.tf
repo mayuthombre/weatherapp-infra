@@ -41,13 +41,13 @@ variable "certificate_arn" {
 }
 
 variable "blue_pubic_subnets" {
-  type = list(string)
+  type        = list(string)
   description = "public subnet ID"
-  default = [ "" ]
+  default     = [""]
 }
 
 variable "green_pubic_subnets" {
-  type = list(string)
+  type        = list(string)
   description = "public subnet ID"
-  default = [ "" ]
+  default     = [""]
 }
