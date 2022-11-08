@@ -27,15 +27,26 @@ module "alb" {
   blue_vpc_id          = module.vpc.blue_vpc_id
   green_vpc_id = module.vpc.green_vpc_id
   depends_on      = [module.vpc]
-  # certificate_arn = module.route53.certificate_arn
+  blue_certificate_arn = module.route53.blue_certificate_arn
+  green_certificate_arn = module.route53.green_certificate_arn
 }
 
-# module "ecr" {
-#   source = "./modules/ecr"
+module "route53" {
+  source = "./modules/route53"
 
-#   tags = var.tags
-#   name = var.name
-# }
+  domain_name            = var.domain_name
+  blue_load_balancer_dns_name = module.alb.blue_load_balancer_dns_name
+  green_load_balancer_dns_name = module.alb.green_load_balancer_dns_name
+  blue_load_balancer_zone_id  = module.alb.blue_load_balancer_zone_id
+  green_load_balancer_zone_id = module.alb.green_load_balancer_zone_id
+}
+
+module "ecr" {
+  source = "./modules/ecr"
+
+  tags = var.tags
+  name = var.name
+}
 
 # module "ecs" {
 #   source = "./modules/ecs"
@@ -49,12 +60,6 @@ module "alb" {
 #   subnet_id            = [module.vpc.private_subnet_a, module.vpc.private_subnet_b, module.vpc.private_subnet_c]
 #   target_group         = module.alb.weatherapp_target_group
 #   repo_url             = module.ecr.repo_url
-# }
-
-# module "iam" {
-#   source = "./modules/iam"
-
-#   tags = var.tags
 # }
 
 
@@ -72,10 +77,3 @@ module "alb" {
 #   depends_on          = [module.ecs]
 # }
 
-# module "route53" {
-#   source = "./modules/route53"
-
-#   domain_name            = var.domain_name
-#   load_balancer_dns_name = module.alb.load_balancer_dns_name
-#   load_balancer_zone_id  = module.alb.load_balancer_zone_id
-# }

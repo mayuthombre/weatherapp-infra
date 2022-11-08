@@ -28,6 +28,11 @@ output "green_load_balancer_dns_name" {
 
 
 # zone_id to be used by route53
+
+output "blue_load_balancer_zone_id" {
+  value = aws_alb.blue_weatherapp.zone_id
+}
+
 output "green_load_balancer_zone_id" {
   value = aws_alb.green_weatherapp.zone_id
 }
