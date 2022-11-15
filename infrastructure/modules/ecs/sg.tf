@@ -4,7 +4,7 @@
 
 resource "aws_security_group" "blue_ecs_sg" {
   description = "security group for ECS - Blue"
-  vpc_id      = var.blue_vpc_id
+  vpc_id      = var.vpc_id
 
   # Allow incoming traffic only from the ALB
   ingress {
@@ -34,7 +34,7 @@ resource "aws_security_group" "blue_ecs_sg" {
 
 resource "aws_security_group" "green_ecs_sg" {
   description = "security group for ECS - green"
-  vpc_id      = var.green_vpc_id
+  vpc_id      = var.vpc_id
 
   # Allow incoming traffic only from the ALB
   ingress {

@@ -1,9 +1,3 @@
-# variable "weatherapp-cluster" {
-#   type        = string
-#   description = "cluster name described in tfvars file in main folder"
-#   default     = ""
-# }
-
 variable "ecsTaskExecutionRole" {
   type        = string
   description = "IAM role called from IAM module"
@@ -22,31 +16,13 @@ variable "green_weatherapp_target_group" {
   default     = ""
 }
 
-variable "blue_private_subnets" {
+variable "private_subnets" {
   type        = list(string)
   description = "public subnet IDs fetched from VPC module"
   default     = [""]
 }
 
-variable "green_private_subnets" {
-  type        = list(string)
-  description = "public subnet IDs fetched from VPC module"
-  default     = [""]
-}
-
-# variable "service_security_group" {
-#   type        = string
-#   description = "security group if required"
-#   default     = ""
-# }
-
-variable "blue_vpc_id" {
-  type        = string
-  description = "VPC ID to create these security groups within fetched from VPC module"
-  default     = ""
-}
-
-variable "green_vpc_id" {
+variable "vpc_id" {
   type        = string
   description = "VPC ID to create these security groups within fetched from VPC module"
   default     = ""
@@ -64,13 +40,6 @@ variable "green_lb_sg" {
   default     = ""
 }
 
-
-# variable "target_group" {
-#   type        = string
-#   description = "load balancer target group exported from ALB module"
-#   default     = ""
-# }
-
 variable "blue_repo_url" {
   type        = string
   description = "ECR repo url exported from ECR module"
@@ -82,18 +51,6 @@ variable "green_repo_url" {
   description = "ECR repo url exported from ECR module"
   default     = ""
 }
-
-# variable "task_definition" {
-#   type        = string
-#   description = "task definition exported from another github repo"
-#   default     = ""
-# }
-
-# variable "container_name" {
-#   type        = string
-#   description = "container name exported from another github repo"
-#   default     = ""
-# }
 
 variable "tags" {
   type        = map(string)

@@ -4,7 +4,7 @@
 resource "aws_alb" "green_weatherapp" {
   name               = "${var.name}-greenalb"
   load_balancer_type = "application"
-  subnets            = var.green_pubic_subnets
+  subnets            = var.pubic_subnets
 
   # Referencing the security group
   security_groups = ["${aws_security_group.green_lb_sg.id}"]
@@ -23,7 +23,7 @@ resource "aws_lb_target_group" "green_weatherapp_target_group" {
   port        = 3000 # port to take connection requests on
   protocol    = "HTTP"
   target_type = "ip"
-  vpc_id      = var.green_vpc_id # Referencing the green VPC
+  vpc_id      = var.vpc_id # Referencing the green VPC
   health_check {
     matcher  = "200"
     path     = "/"

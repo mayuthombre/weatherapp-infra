@@ -3,7 +3,7 @@
 #==== Blue LB SG ====#
 resource "aws_security_group" "blue_lb_sg" {
   description = "Security group for blue ALB"
-  vpc_id      = var.blue_vpc_id
+  vpc_id      = var.vpc_id
 
   # ingress {
   #   from_port   = 443 # Allowing traffic in from port 443
@@ -40,7 +40,7 @@ resource "aws_security_group" "blue_lb_sg" {
 #==== Green LB SG ====#
 resource "aws_security_group" "green_lb_sg" {
   description = "Security group for blue ALB"
-  vpc_id      = var.green_vpc_id
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 443 # Allowing traffic in from port 443

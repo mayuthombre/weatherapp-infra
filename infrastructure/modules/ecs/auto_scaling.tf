@@ -5,7 +5,7 @@
 resource "aws_appautoscaling_target" "blue_ecs_target" {
   max_capacity       = 4
   min_capacity       = 2
-  resource_id        = "service/${aws_ecs_cluster.blue_weatherapp_cluster.name}/${aws_ecs_service.blue_weatherapp_ecsservice.name}"
+  resource_id        = "service/${aws_ecs_cluster.weatherapp_cluster.name}/${aws_ecs_service.blue_weatherapp_ecsservice.name}"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
 }
@@ -33,7 +33,7 @@ resource "aws_appautoscaling_policy" "blue_ecs_policy_cpu" {
 resource "aws_appautoscaling_target" "green_ecs_target" {
   max_capacity       = 4
   min_capacity       = 2
-  resource_id        = "service/${aws_ecs_cluster.green_weatherapp_cluster.name}/${aws_ecs_service.green_weatherapp_ecsservice.name}"
+  resource_id        = "service/${aws_ecs_cluster.weatherapp_cluster.name}/${aws_ecs_service.green_weatherapp_ecsservice.name}"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
 }

@@ -19,15 +19,12 @@ module "iam" {
 module "alb" {
   source = "./modules/alb"
 
-  tags                = var.tags
-  name                = var.name
-  blue_pubic_subnets  = module.vpc.blue_pubic_subnets
-  green_pubic_subnets = module.vpc.green_pubic_subnets
-  # subnet_id       = [module.vpc.pub_subnet_id_a, module.vpc.pub_subnet_id_b, module.vpc.pub_subnet_id_c]
-  blue_vpc_id     = module.vpc.blue_vpc_id
-  green_vpc_id    = module.vpc.green_vpc_id
-  depends_on      = [module.vpc]
+  tags            = var.tags
+  name            = var.name
+  pubic_subnets   = module.vpc.pubic_subnets
+  vpc_id          = module.vpc.vpc_id
   certificate_arn = module.route53.certificate_arn
+  depends_on      = [module.vpc]
 }
 
 module "route53" {
@@ -52,13 +49,11 @@ module "ecs" {
 
   tags                          = var.tags
   name                          = var.name
-  blue_vpc_id                   = module.vpc.blue_vpc_id
-  green_vpc_id                  = module.vpc.green_vpc_id
+  vpc_id                        = module.vpc.vpc_id
   blue_lb_sg                    = module.alb.blue_lb_sg
   green_lb_sg                   = module.alb.green_lb_sg
   ecsTaskExecutionRole          = module.iam.ecsTaskExecutionRole
-  blue_private_subnets          = module.vpc.blue_private_subnets
-  green_private_subnets         = module.vpc.green_private_subnets
+  private_subnets               = module.vpc.private_subnets
   blue_weatherapp_target_group  = module.alb.blue_weatherapp_target_group
   green_weatherapp_target_group = module.alb.green_weatherapp_target_group
   blue_repo_url                 = module.ecr.blue_repo_url
