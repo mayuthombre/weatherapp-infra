@@ -35,7 +35,8 @@ resource "aws_lb_target_group" "blue_weatherapp_target_group" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-bluetg"
+      Name = "${var.name}-bluetg",
+      environment = "blue"
     }
   )
 }
@@ -55,7 +56,8 @@ resource "aws_lb_target_group" "blue_weatherapp_target_group" {
 #   tags = merge(
 #     var.tags,
 #     {
-#       name = "${var.name}-bluelisteners"
+#       name = "${var.name}-bluelisteners",
+#       environment = "blue"
 #     }
 #   )
 # }
@@ -85,7 +87,7 @@ resource "aws_lb_listener" "blue_http" {
   tags = merge(
     var.tags,
     {
-      name = "${var.name}-blueredirectRule"
+      environment = "blue"
     }
   )
 }

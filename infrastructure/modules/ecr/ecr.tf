@@ -9,7 +9,12 @@ resource "aws_ecr_repository" "blue_weatherapp_ecrrepo" {
     scan_on_push = true # setting image scanning for all pushed images
   }
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      environment = "blue"
+    }
+  )
 }
 
 #==== Green repository ====#
@@ -22,5 +27,10 @@ resource "aws_ecr_repository" "green_weatherapp_ecrrepo" {
     scan_on_push = true # setting image scanning for all pushed images
   }
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      environment = "green"
+    }
+  )
 }
