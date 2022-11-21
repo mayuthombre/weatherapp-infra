@@ -35,7 +35,7 @@ resource "aws_lb_target_group" "green_weatherapp_target_group" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-greentg",
+      Name        = "${var.name}-greentg",
       environment = "green"
     }
   )
@@ -56,7 +56,7 @@ resource "aws_lb_listener" "green_listener" {
   tags = merge(
     var.tags,
     {
-      name = "${var.name}-greenlisteners",
+      name        = "${var.name}-greenlisteners",
       environment = "green"
     }
   )

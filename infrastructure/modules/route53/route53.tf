@@ -4,14 +4,24 @@ data "aws_route53_zone" "primary" {
 }
 
 # create route 53 record 
-resource "aws_route53_record" "domain" {
+resource "aws_route53_record" "blue_domain" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = var.resource_name_prefix
+  name    = "blue.weatherapp.click"
   type    = "A"
 
   alias {
-    # name    = var.blue_load_balancer_dns_name # attaching load balancer
-    # zone_id = var.blue_load_balancer_zone_id
+    name    = var.blue_load_balancer_dns_name # attaching load balancer
+    zone_id = var.blue_load_balancer_zone_id
+    evaluate_target_health = true
+  }
+}
+
+resource "aws_route53_record" "green_domain" {
+  zone_id = data.aws_route53_zone.primary.zone_id
+  name    = "green.weatherapp.click"
+  type    = "A"
+
+  alias {
     name                   = var.green_load_balancer_dns_name # attaching load balancer
     zone_id                = var.green_load_balancer_zone_id
     evaluate_target_health = true
@@ -23,9 +33,9 @@ resource "aws_acm_certificate" "certificate" {
   domain_name       = data.aws_route53_zone.primary.name
   validation_method = "DNS"
 
-  depends_on = [
-    aws_route53_record.domain
-  ]
+  # depends_on = [
+  #   aws_route53_record.domain
+  # ]
 
   tags = var.tags
 }

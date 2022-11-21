@@ -35,7 +35,7 @@ resource "aws_lb_target_group" "blue_weatherapp_target_group" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-bluetg",
+      Name        = "${var.name}-bluetg",
       environment = "blue"
     }
   )

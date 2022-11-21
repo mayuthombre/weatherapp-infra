@@ -31,7 +31,7 @@ resource "aws_security_group" "blue_lb_sg" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-blueALB-sg",
+      Name        = "${var.name}-blueALB-sg",
       environment = "blue"
     }
   )
@@ -69,7 +69,7 @@ resource "aws_security_group" "green_lb_sg" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.name}-greenALB-sg",
+      Name        = "${var.name}-greenALB-sg",
       environment = "green"
     }
   )
