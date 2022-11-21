@@ -16,7 +16,7 @@ threshhold          = "20"
 email = "mayu.thombre@contino.io"
 
 # sub-domain name for route 53
-domain_name = "www.weatherapp.click"
+domain_name = "weatherapp.click"
 
 # standardised tags that will be used across all the resources that support tagging
 tags = {

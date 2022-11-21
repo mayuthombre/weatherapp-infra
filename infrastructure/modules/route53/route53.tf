@@ -30,7 +30,8 @@ resource "aws_route53_record" "green_domain" {
 
 # Generate certificate for domain name using ACM
 resource "aws_acm_certificate" "certificate" {
-  domain_name       = data.aws_route53_zone.primary.name
+  # domain_name       = data.aws_route53_zone.primary.name
+  domain_name = "www.weatherapp.click"
   validation_method = "DNS"
 
   # depends_on = [
