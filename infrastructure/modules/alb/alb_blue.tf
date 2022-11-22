@@ -56,7 +56,7 @@ resource "aws_lb_listener" "blue_listener" {
   tags = merge(
     var.tags,
     {
-      name = "${var.name}-bluelisteners",
+      name        = "${var.name}-bluelisteners",
       environment = "blue"
     }
   )

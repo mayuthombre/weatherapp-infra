@@ -10,8 +10,8 @@ resource "aws_route53_record" "blue_domain" {
   type    = "A"
 
   alias {
-    name    = var.blue_load_balancer_dns_name # attaching load balancer
-    zone_id = var.blue_load_balancer_zone_id
+    name                   = var.blue_load_balancer_dns_name # attaching load balancer
+    zone_id                = var.blue_load_balancer_zone_id
     evaluate_target_health = true
   }
 }
@@ -31,7 +31,7 @@ resource "aws_route53_record" "green_domain" {
 # Generate certificate for domain name using ACM
 resource "aws_acm_certificate" "certificate" {
   # domain_name       = data.aws_route53_zone.primary.name
-  domain_name = "www.weatherapp.click"
+  domain_name       = "www.weatherapp.click"
   validation_method = "DNS"
 
   # depends_on = [
@@ -69,4 +69,34 @@ resource "aws_acm_certificate_validation" "validation" {
   depends_on = [
     aws_route53_record.certificate
   ]
+}
+
+
+# Creating CNAME records
+resource "aws_route53_record" "blue_cname" {
+  zone_id = data.aws_route53_zone.primary.zone_id
+  name    = "www"
+  type    = "CNAME"
+  ttl     = 5
+
+  weighted_routing_policy {
+    weight = 10
+  }
+
+  # set_identifier = "dev"
+  records = ["blue.weatherapp.click"]
+}
+
+resource "aws_route53_record" "green_cname" {
+  zone_id = data.aws_route53_zone.primary.zone_id
+  name    = "www"
+  type    = "CNAME"
+  ttl     = 5
+
+  weighted_routing_policy {
+    weight = 10
+  }
+
+  # set_identifier = "dev"
+  records = ["green.weatherapp.click"]
 }
