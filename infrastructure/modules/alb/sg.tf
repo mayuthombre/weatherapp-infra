@@ -12,12 +12,12 @@ resource "aws_security_group" "blue_lb_sg" {
     cidr_blocks = ["0.0.0.0/0"] # Allowing traffic in from all sources
   }
 
-  ingress {
-    from_port   = 80 # Allowing traffic in from port 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Allowing traffic in from all sources
-  }
+  # ingress {
+  #   from_port   = 80 # Allowing traffic in from port 80
+  #   to_port     = 80
+  #   protocol    = "tcp"
+  #   cidr_blocks = ["0.0.0.0/0"] # Allowing traffic in from all sources
+  # }
 
   # Allow all outgoing traffic
   egress {
@@ -50,12 +50,12 @@ resource "aws_security_group" "green_lb_sg" {
     cidr_blocks = ["0.0.0.0/0"] # Allowing traffic in from all sources
   }
 
-  ingress {
-    from_port   = 80 # Allowing traffic in from port 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Allowing traffic in from all sources
-  }
+  # ingress {
+  #   from_port   = 80 # Allowing traffic in from port 80
+  #   to_port     = 80
+  #   protocol    = "tcp"
+  #   cidr_blocks = ["0.0.0.0/0"] # Allowing traffic in from all sources
+  # }
 
   # Allow all outgoing traffic
   egress {
