@@ -83,7 +83,7 @@ resource "aws_route53_record" "blue_cname" {
     weight = 10
   }
 
-  # set_identifier = "dev"
+  set_identifier = "blue"
   records = ["blue.weatherapp.click"]
 }
 
@@ -97,6 +97,6 @@ resource "aws_route53_record" "green_cname" {
     weight = 10
   }
 
-  # set_identifier = "dev"
+  set_identifier = "green"
   records = ["green.weatherapp.click"]
 }
