@@ -80,7 +80,7 @@ resource "aws_route53_record" "blue_cname" {
   ttl     = 5
 
   weighted_routing_policy {
-    weight = 10
+    weight = 50
   }
 
   set_identifier = "blue"
@@ -94,7 +94,7 @@ resource "aws_route53_record" "green_cname" {
   ttl     = 5
 
   weighted_routing_policy {
-    weight = 10
+    weight = 50
   }
 
   set_identifier = "green"
