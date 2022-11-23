@@ -77,7 +77,7 @@ resource "aws_route53_record" "blue_cname" {
   zone_id = data.aws_route53_zone.primary.zone_id
   name    = "www"
   type    = "CNAME"
-  ttl     = 5
+  ttl     = 60
 
   weighted_routing_policy {
     weight = 50
@@ -91,7 +91,7 @@ resource "aws_route53_record" "green_cname" {
   zone_id = data.aws_route53_zone.primary.zone_id
   name    = "www"
   type    = "CNAME"
-  ttl     = 5
+  ttl     = 60
 
   weighted_routing_policy {
     weight = 50
