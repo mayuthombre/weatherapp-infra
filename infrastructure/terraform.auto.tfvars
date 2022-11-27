@@ -30,3 +30,6 @@ tags = {
 # stanadrd prefix for resources names
 name = "mayu-weatherapp"
 
+# DNS routing weight
+blue_routing_weight  = 100
+green_routing_weight = 0

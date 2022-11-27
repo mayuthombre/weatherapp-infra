@@ -80,11 +80,11 @@ resource "aws_route53_record" "blue_cname" {
   ttl     = 10
 
   weighted_routing_policy {
-    weight = 50
+    weight = var.blue_routing_weight
   }
 
   set_identifier = "blue"
-  records = ["blue.weatherapp.click"]
+  records        = ["blue.weatherapp.click"]
 }
 
 resource "aws_route53_record" "green_cname" {
@@ -94,9 +94,9 @@ resource "aws_route53_record" "green_cname" {
   ttl     = 10
 
   weighted_routing_policy {
-    weight = 50
+    weight = var.green_routing_weight
   }
 
   set_identifier = "green"
-  records = ["green.weatherapp.click"]
+  records        = ["green.weatherapp.click"]
 }

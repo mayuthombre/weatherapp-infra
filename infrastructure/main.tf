@@ -35,6 +35,8 @@ module "route53" {
   green_load_balancer_dns_name = module.alb.green_load_balancer_dns_name
   blue_load_balancer_zone_id   = module.alb.blue_load_balancer_zone_id
   green_load_balancer_zone_id  = module.alb.green_load_balancer_zone_id
+  blue_routing_weight          = var.blue_routing_weight
+  green_routing_weight         = var.green_routing_weight
 }
 
 module "ecr" {

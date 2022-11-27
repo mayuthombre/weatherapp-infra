@@ -48,3 +48,13 @@ variable "name" {
   description = "name for each resource"
   default     = ""
 }
+
+variable "blue_routing_weight" {
+  type    = number
+  default = 100
+}
+
+variable "green_routing_weight" {
+  type    = number
+  default = 0
+}
