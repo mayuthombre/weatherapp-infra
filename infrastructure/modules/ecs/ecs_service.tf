@@ -6,7 +6,7 @@ resource "aws_ecs_service" "blue_weatherapp_ecsservice" {
   cluster         = aws_ecs_cluster.weatherapp_cluster.id               # Referencing our created Cluster
   task_definition = aws_ecs_task_definition.blue_weatherapp_ecstask.arn # Referencing the task our service will spin up
   launch_type     = "FARGATE"                                           # selecing our launch type for running tasks
-  desired_count   = 2                                                   # Setting the number of containers we want deployed to 3
+  desired_count   = 1                                                   # Setting the number of containers we want deployed to 3
 
 
   # Attach ALB to the ECS service
@@ -39,7 +39,7 @@ resource "aws_ecs_service" "green_weatherapp_ecsservice" {
   cluster         = aws_ecs_cluster.weatherapp_cluster.id                # Referencing our created Cluster
   task_definition = aws_ecs_task_definition.green_weatherapp_ecstask.arn # Referencing the task our service will spin up
   launch_type     = "FARGATE"                                            # selecing our launch type for running tasks
-  desired_count   = 2                                                    # Setting the number of containers we want deployed to 3
+  desired_count   = 1                                                    # Setting the number of containers we want deployed to 3
 
 
   # Attach ALB to the ECS service
