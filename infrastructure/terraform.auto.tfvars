@@ -31,5 +31,5 @@ tags = {
 name = "mayu-weatherapp"
 
 # DNS routing weight
-blue_routing_weight  = 100
-green_routing_weight = 0
+blue_routing_weight  = 0
+green_routing_weight = 100
