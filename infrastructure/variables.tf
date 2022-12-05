@@ -22,24 +22,6 @@ variable "vpc_cidr" {
   default     = ""
 }
 
-# variable "private_cidr_a" {
-#   type        = string
-#   description = "CIDR block range for private subnet"
-#   default     = ""
-# }
-
-# variable "private_cidr_b" {
-#   type        = string
-#   description = "CIDR block range for private subnet"
-#   default     = ""
-# }
-
-# variable "private_cidr_c" {
-#   type        = string
-#   description = "CIDR block range for private subnet"
-#   default     = ""
-# }
-
 variable "comparison_operator" {
   type        = string
   description = "arithmetic operation to use when comparing the specified statistic and threshold"

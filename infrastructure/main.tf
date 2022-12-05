@@ -74,8 +74,8 @@ module "cloudwatch" {
   threshhold          = var.threshhold
   email               = var.email
   cluster_name        = module.ecs.cluster_name
-  blue_service_name        = module.ecs.blue_service_name
-  green_service_name        = module.ecs.green_service_name
+  blue_service_name   = module.ecs.blue_service_name
+  green_service_name  = module.ecs.green_service_name
   depends_on          = [module.ecs]
 }
 

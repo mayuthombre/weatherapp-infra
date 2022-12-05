@@ -2,7 +2,7 @@
 
 #### Alarm for Blue service ####
 resource "aws_cloudwatch_metric_alarm" "blue_service_CPUuse" {
-  alarm_name                = "${var.name}-BluecpuUtilisation"                          # name this Cloudwatch alarm
+  alarm_name                = "${var.name}-BluecpuUtilisation"                      # name this Cloudwatch alarm
   comparison_operator       = var.comparison_operator                               # Define the alarm condition
   evaluation_periods        = var.evaluation_periods                                # set how many data period to compare before triggering the alarm
   threshold                 = var.threshhold                                        # define the threshhold value above/below which alarm will be triggered
@@ -37,7 +37,7 @@ resource "aws_cloudwatch_metric_alarm" "blue_service_CPUuse" {
   tags = merge(
     var.tags,
     {
-      name = "${var.name}-cw",
+      name        = "${var.name}-Bluecw",
       environment = "blue"
     }
   )
@@ -46,7 +46,7 @@ resource "aws_cloudwatch_metric_alarm" "blue_service_CPUuse" {
 
 #### Alarm for Green service ####
 resource "aws_cloudwatch_metric_alarm" "green_service_CPUuse" {
-  alarm_name                = "${var.name}-GreencpuUtilisation"                          # name this Cloudwatch alarm
+  alarm_name                = "${var.name}-GreencpuUtilisation"                     # name this Cloudwatch alarm
   comparison_operator       = var.comparison_operator                               # Define the alarm condition
   evaluation_periods        = var.evaluation_periods                                # set how many data period to compare before triggering the alarm
   threshold                 = var.threshhold                                        # define the threshhold value above/below which alarm will be triggered
@@ -81,7 +81,7 @@ resource "aws_cloudwatch_metric_alarm" "green_service_CPUuse" {
   tags = merge(
     var.tags,
     {
-      name = "${var.name}-cw",
+      name        = "${var.name}-Greencw",
       environment = "green"
     }
   )
