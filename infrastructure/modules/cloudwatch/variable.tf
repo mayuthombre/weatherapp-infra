@@ -20,7 +20,13 @@ variable "cluster_name" {
   default     = ""
 }
 
-variable "service_name" {
+variable "blue_service_name" {
+  type        = string
+  description = "service name that will be monitored by cloudwatch"
+  default     = ""
+}
+
+variable "green_service_name" {
   type        = string
   description = "service name that will be monitored by cloudwatch"
   default     = ""

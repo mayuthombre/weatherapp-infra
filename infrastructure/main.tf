@@ -64,17 +64,18 @@ module "ecs" {
 }
 
 
-# module "cloudwatch" {
-#   source = "./modules/cloudwatch"
+module "cloudwatch" {
+  source = "./modules/cloudwatch"
 
-#   tags                = var.tags
-#   name                = var.name
-#   comparison_operator = var.comparison_operator
-#   evaluation_periods  = var.evaluation_periods
-#   threshhold          = var.threshhold
-#   email               = var.email
-#   cluster_name        = module.ecs.cluster_name
-#   service_name        = module.ecs.service_name
-#   depends_on          = [module.ecs]
-# }
+  tags                = var.tags
+  name                = var.name
+  comparison_operator = var.comparison_operator
+  evaluation_periods  = var.evaluation_periods
+  threshhold          = var.threshhold
+  email               = var.email
+  cluster_name        = module.ecs.cluster_name
+  blue_service_name        = module.ecs.blue_service_name
+  green_service_name        = module.ecs.green_service_name
+  depends_on          = [module.ecs]
+}
 
