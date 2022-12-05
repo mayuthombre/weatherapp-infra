@@ -2,10 +2,10 @@ name: Deploy
 on:
   workflow_dispatch:
     branches:
-      - blue-green
+      - master
   push:
     branches:
-      - blue-green
+      - master
     paths:
       - 'infrastructure/**'
       - '.github/workflows/main.yml'
