@@ -5,17 +5,30 @@ variable "resource_name_prefix" {
   default     = ""
 }
 
-variable "load_balancer_dns_name" {
+variable "blue_load_balancer_dns_name" {
   type        = string
   description = "dns_name exported from load balancer module"
   default     = ""
 }
 
-variable "load_balancer_zone_id" {
+variable "green_load_balancer_dns_name" {
+  type        = string
+  description = "dns_name exported from load balancer module"
+  default     = ""
+}
+
+variable "blue_load_balancer_zone_id" {
   type        = string
   description = "zone_id exported from load balancer module"
   default     = ""
 }
+
+variable "green_load_balancer_zone_id" {
+  type        = string
+  description = "zone_id exported from load balancer module"
+  default     = ""
+}
+
 
 # domain name
 variable "domain_name" {
@@ -34,4 +47,14 @@ variable "name" {
   type        = string
   description = "name for each resource"
   default     = ""
+}
+
+variable "blue_routing_weight" {
+  type    = number
+  default = 100
+}
+
+variable "green_routing_weight" {
+  type    = number
+  default = 0
 }

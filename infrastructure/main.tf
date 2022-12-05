@@ -1,19 +1,19 @@
 module "vpc" {
   source = "./modules/vpc"
 
-  tags           = var.tags
-  name           = var.name
-  vpc_cidr       = var.vpc_cidr
-  pub_cidr_a     = var.pub_cidr_a
-  pub_cidr_b     = var.pub_cidr_b
-  pub_cidr_c     = var.pub_cidr_c
-  private_cidr_a = var.private_cidr_a
-  private_cidr_b = var.private_cidr_b
-  private_cidr_c = var.private_cidr_c
-  az_a           = var.az_a
-  az_b           = var.az_b
-  az_c           = var.az_c
-  region         = var.region
+  tags                     = var.tags
+  name                     = var.name
+  vpc_cidr                 = var.vpc_cidr
+  az_count                 = var.az_count
+  public_subnet_cidr_bits  = var.public_subnet_cidr_bits
+  private_subnet_cidr_bits = var.private_subnet_cidr_bits
+  region                   = var.region
+}
+
+module "iam" {
+  source = "./modules/iam"
+
+  tags = var.tags
 }
 
 module "alb" {
@@ -21,10 +21,22 @@ module "alb" {
 
   tags            = var.tags
   name            = var.name
-  subnet_id       = [module.vpc.pub_subnet_id_a, module.vpc.pub_subnet_id_b, module.vpc.pub_subnet_id_c]
+  pubic_subnets   = module.vpc.pubic_subnets
   vpc_id          = module.vpc.vpc_id
-  depends_on      = [module.vpc]
   certificate_arn = module.route53.certificate_arn
+  depends_on      = [module.vpc]
+}
+
+module "route53" {
+  source = "./modules/route53"
+
+  domain_name                  = var.domain_name
+  blue_load_balancer_dns_name  = module.alb.blue_load_balancer_dns_name
+  green_load_balancer_dns_name = module.alb.green_load_balancer_dns_name
+  blue_load_balancer_zone_id   = module.alb.blue_load_balancer_zone_id
+  green_load_balancer_zone_id  = module.alb.green_load_balancer_zone_id
+  blue_routing_weight          = var.blue_routing_weight
+  green_routing_weight         = var.green_routing_weight
 }
 
 module "ecr" {
@@ -34,35 +46,21 @@ module "ecr" {
   name = var.name
 }
 
-# calling app repo ECS module
-
-module "ecs_app" {
-  source = "git::https://github.com/mayuthombre/weatherapp-app.git//infrastructure/modules/ecs?ref=master"
-
-  repo_url             = module.ecr.repo_url
-  ecsTaskExecutionRole = module.iam.ecsTaskExecutionRole
-}
-
 module "ecs" {
   source = "./modules/ecs"
 
-  tags                 = var.tags
-  name                 = var.name
-  vpc_id               = module.vpc.vpc_id
-  depends_on           = [module.vpc]
-  albsg_id             = module.alb.load_balancer_security_group
-  ecsTaskExecutionRole = module.iam.ecsTaskExecutionRole
-  subnet_id            = [module.vpc.private_subnet_a, module.vpc.private_subnet_b, module.vpc.private_subnet_c]
-  target_group         = module.alb.weatherapp_target_group
-  repo_url             = module.ecr.repo_url
-  task_definition      = module.ecs_app.task_definition
-  container_name       = module.ecs_app.container_name
-}
-
-module "iam" {
-  source = "./modules/iam"
-
-  tags = var.tags
+  tags                          = var.tags
+  name                          = var.name
+  vpc_id                        = module.vpc.vpc_id
+  blue_lb_sg                    = module.alb.blue_lb_sg
+  green_lb_sg                   = module.alb.green_lb_sg
+  ecsTaskExecutionRole          = module.iam.ecsTaskExecutionRole
+  private_subnets               = module.vpc.private_subnets
+  blue_weatherapp_target_group  = module.alb.blue_weatherapp_target_group
+  green_weatherapp_target_group = module.alb.green_weatherapp_target_group
+  blue_repo_url                 = module.ecr.blue_repo_url
+  green_repo_url                = module.ecr.green_repo_url
+  depends_on                    = [module.vpc]
 }
 
 
@@ -76,14 +74,8 @@ module "cloudwatch" {
   threshhold          = var.threshhold
   email               = var.email
   cluster_name        = module.ecs.cluster_name
-  service_name        = module.ecs.service_name
+  blue_service_name   = module.ecs.blue_service_name
+  green_service_name  = module.ecs.green_service_name
   depends_on          = [module.ecs]
 }
 
-module "route53" {
-  source = "./modules/route53"
-
-  domain_name            = var.domain_name
-  load_balancer_dns_name = module.alb.load_balancer_dns_name
-  load_balancer_zone_id  = module.alb.load_balancer_zone_id
-}

@@ -33,3 +33,9 @@ variable "certificate_arn" {
   description = "certificate used to make load balancer secure"
   default     = ""
 }
+
+variable "pubic_subnets" {
+  type        = list(string)
+  description = "public subnet ID"
+  default     = [""]
+}

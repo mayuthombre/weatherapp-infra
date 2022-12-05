@@ -2,16 +2,10 @@
 region = "ap-southeast-2"
 
 # Required input variables for complete networking
-vpc_cidr       = "10.0.0.0/24"
-pub_cidr_a     = "10.0.0.16/28"
-pub_cidr_b     = "10.0.0.32/28"
-pub_cidr_c     = "10.0.0.48/28"
-private_cidr_a = "10.0.0.64/26"
-private_cidr_b = "10.0.0.128/26"
-private_cidr_c = "10.0.0.192/26"
-az_a           = "ap-southeast-2a"
-az_b           = "ap-southeast-2b"
-az_c           = "ap-southeast-2c"
+vpc_cidr                 = "10.0.0.0/16"
+az_count                 = 3
+public_subnet_cidr_bits  = 8
+private_subnet_cidr_bits = 8
 
 # input variables for cloudwatch
 comparison_operator = "GreaterThanOrEqualToThreshold"
@@ -36,3 +30,6 @@ tags = {
 # stanadrd prefix for resources names
 name = "mayu-weatherapp"
 
+# DNS routing weight
+blue_routing_weight  = 100
+green_routing_weight = 0

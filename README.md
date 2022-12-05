@@ -1,17 +1,13 @@
 
+# Introduction
 
-# Pathways Dojo Infra Node Weather App Quick Starter
+This repository can be used to deploy any container based application in AWS Cloud. Main idea here is to deploy any software on ECS Fargate with Blue-Green Deployment strategy with Canary style load distribution.
 
-This repository is used in conjunction with the Contino Infra Engineer to Cloud Engineer Pathway course delivered in Contini-U.
+Primary use case of this code is to deploy resources in Cloud. Therefore, it makes use of Terraform modules such as ALB, ECR, ECS, Route53, VPC, IAM & Cloudwatch. You can use it to deploy, manage and destroy your cloud resources.
 
-It includes and supports the following functionality:
-* Dockerfile and docker-compose configuration for 3M based deployments
-* Makefile providing basic Terraform deployment functionality
-* GitHub workflows for supporting basic Terraform deploy and destroy functionality
-* Terraform IaC for the test deployment of an s3 bucket
-* Node Weather App - https://github.com/phattp/nodejs-weather-app
+Continue reading for more instructions on how to use this repository.
 
-<br> 
+IMPORTANT NOTE: You will also need to consider how will your CI/CD pipeline know which environment to deploy your code. It will depend on your strategy for Blue-Green, however, I have made it simple in one of my example which can be found here: https://github.com/mayuthombre/weatherapp-app
 
 ## Getting Started
 This GitHub template should be used to create your own repository. Repository will need to be public if you are creating it in your personal GitHub account in order to support approval gates in GitHub actions. Configure the following to get started:
@@ -20,11 +16,14 @@ This GitHub template should be used to create your own repository. Repository wi
 * Create an environment in your repository named `approval` to support GitHub Workflows, selecting `required reviewers` and adding yourself as an approver.
 * Update the `key` value in the `meta.tf` file replacing `<username>` with your username for the name of the Terraform state file.
 * Update the default bucket name in the `variable.tf` file to a something globally unique.
+* All the variables must be passed in the `terraform.auto.tfvars` file
 * Create GitHub Secrets in your repository for `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and `AWS_SESSION_TOKEN` if using temporary credentials.
 * Push local changes to the GitHub repos master branch, which should trigger the Github deploy workflow, and deploy the s3 bucket. Remember to review tf plan and approve apply.
 * Create a pull request to merge master changes to destroy branch. Merge changes to trigger the Github destroy workflow deleting the s3 bucket. Remember to review the tf speculative plan and approve destroy.
 * You can list s3 bucket in the APAC Dev account by running `make list_bucket` locally within the repo clone, to check bucket creation and removal.
 
+
+(reminder) IMPORTANT NOTE: You will also need to consider how will your CI/CD pipeline know which environment to deploy your code. It will depend on your strategy for Blue-Green, however, I have made it simple in one of my example which can be found here: https://github.com/mayuthombre/weatherapp-app
 
 Keep reading for in-depth details.
 
